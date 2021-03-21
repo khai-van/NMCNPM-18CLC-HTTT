@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>admin</title>
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+	<div id="header"><img id = "logo" src="/images/logo.png" ></div>
+	<div id="container">
+		<div id = "control">
+			<a href="/none" underlin = "none">Danh muc sản phẩm</a>
+			<br>
+			<a href="/admin/addProduct">Thêm sản phẩm</a>
+			<br>
+			<a href="/none">Quản lý kho</a>
+			<br>
+		</div>
+		<div id = "body">
+	    {{{ body }}}
+		</div>
+		<div id="clear"></div>
+    </div>
+</body>
+</html>

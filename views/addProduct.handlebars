@@ -1,0 +1,128 @@
+<style>
+	* {box-sizing:border-box}
+	.show {
+	  max-width: 50%;
+	  position: relative;
+	  margin: auto;
+	}
+
+	/* Hide the images by default */
+	.mySlides {
+	  display: none;
+	}
+
+	/* Next & previous buttons */
+	.prev, .next {
+	  cursor: pointer;
+	  position: absolute;
+	  top: 50%;
+	  width: auto;
+	  margin-top: -22px;
+	  padding: 16px;
+	  color: white;
+	  font-weight: bold;
+	  font-size: 18px;
+	  transition: 0.6s ease;
+	  border-radius: 0 3px 3px 0;
+	  user-select: none;
+	}
+
+	/* Position the "next button" to the right */
+	.next {
+	  right: 0;
+	  border-radius: 3px 0 0 3px;
+	}
+
+	/* On hover, add a black background color with a little bit see-through */
+	.prev:hover, .next:hover {
+	  background-color: rgba(0,0,0,0.8);
+	}
+
+	/* Fading animation */
+	.fade {
+	  -webkit-animation-name: fade;
+	  -webkit-animation-duration: 1.5s;
+	  animation-name: fade;
+	  animation-duration: 1.5s;
+	}
+
+	@-webkit-keyframes fade {
+	  from {opacity: .4}
+	  to {opacity: 1}
+	}
+
+	@keyframes fade {
+	  from {opacity: .4}
+	  to {opacity: 1}
+	}
+</style>
+<script>
+	var loadFile = function(event){
+		var file = document.querySelector('input[type=file]').files;
+		var show = document.getElementById('show');
+		for(var i=0;i<file.length;i++){
+			var img = document.createElement('img'); 
+			var div = document.createElement('div'); 
+            img.src = URL.createObjectURL(file[i]);
+            div.className = "img fade";
+            div.id = i;
+            div.appendChild(img);
+            show.appendChild(div);
+		}
+		show.innerHTML = show.innerHTML + '<a class="prev" onclick="plusSlides(-1)">&#10094;</a><a class="next" onclick="plusSlides(1)">&#10095;</a>';
+	}
+	var slideIndex = 1;
+	showSlides(slideIndex);
+
+	// Next/previous controls
+	function plusSlides(n) {
+	  showSlides(slideIndex += n);
+	}
+
+	// Thumbnail image controls
+	function currentSlide(n) {
+	  showSlides(slideIndex = n);
+	}
+
+	function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("img");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > slides.length) {slideIndex = 1}
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+	      slides[i].style.display = "none";
+	  }
+	  for (i = 0; i < dots.length; i++) {
+	      dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";
+	  dots[slideIndex-1].className += " active";
+	}
+</script>
+
+<form method="post" action="upload/post" enctype="multipart/form-data">
+	<label for="name">Tên sản phẩm</label><br>
+  	<input type="text" id="name" name="name"><br>
+  	<label for="images">Hình sản phẩm</label><br>
+    <div class="form-group">
+	    <input type="file" multiple name="image" class="input-group input-file" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg"/>
+	    <div id ="show">
+	    </div>
+    </div>
+    <label for="price">Giá sản phẩm(VNĐ)</label><br>
+    <input type="text" id="price" ><br>
+    <label for="amount">Số lượng</label><br>
+    <input type="number" id="amount" ><br>
+    <label for="type">Loại sản phẩm</label><br>
+    <select id="type">
+    	{{# each productType}}
+    		<option value="{{ this }}">{{ this }}</option>
+		{{/each}}
+    </select><br>
+    <label for="description">Mô tả sản phẩm</label><br>
+    <textarea name="message" rows="9" cols="80%"></textarea><br><br>
+    <button type="submit" name="upload" class="btn btn-primary pull-right">Thêm</button>
+</form>
+
+
