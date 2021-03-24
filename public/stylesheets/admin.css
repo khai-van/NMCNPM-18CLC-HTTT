@@ -1,54 +1,57 @@
-#header {
-    width: 100%;
-    height: 100px;
-    text-align: center;
-    background-color: #4F4F4F;
+.nav-link{
+  color: #dbdbdb;
+  font-weight: bold
 }
-#container {
-    width: 100%;
-    height: 100vh;
-    margin: auto;
-	background-color: #D5D2D2;
+.nav-link  hover{
+  color: #575654;
+  font-weight: bold
 }
-#control{
-  width: 15vw;
-  height: 100%;
-  border: 1px #808080;
-  background-color: #808080;
-  float: left;
-}
-
-#body{
-  width: 80vw;
-  height: 100%;
-  float: right;
-  padding: 14px 25px;
-  font-family: "Times New Roman", Times, serif;
-}
-#clear {
-    clear: both;
-}
-img{
-	max-height: 100%;
-	max-width: 100%; 
-}
-a:link, a:visited {
-  background-color: #808080;
+.left, .right {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  padding: 16px;
   color: white;
-  padding: 10% 5%;
-  text-align: left;
-  text-decoration: none;
-  display: inline-block;
-  font-family: "Times New Roman", Times, serif;
-  width: 100%;
-  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.left{
+  left: 0;
+}
+/* Position the "next button" to the right */
+.right {
+  right: 0;
+  border-radius: 3px 0 0 3px;
 }
 
-a:hover, a:active {
-  background-color: #696969;
+/* On hover, add a black background color with a little bit see-through */
+.left:hover, .right:hover {
+  background-color: rgba(0,0,0,0.8);
 }
-
-.img{
-  width: 128px;
-  height: 128px;
+.fit-image{
+  width: auto;
+  max-width: 225px;
+  height: 225px;
+  max-height: 225px;
+}
+.image{
+  display: none;
+}
+label{
+  font-weight: 600;
+}
+@media screen and (max-width: 450px){
+  .fit-image{
+    width: auto;
+    max-width: 40vw;
+    height: 40vw;
+    max-height: 40vw;
+  }
+  .logo{
+    height: 5vw;
+  }
 }

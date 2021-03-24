@@ -1,29 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-    <title>admin</title>
-    <link rel="stylesheet" href="/stylesheets/admin.css">
+	<title>admin</title>
+	<link rel="stylesheet" href="/stylesheets/admin.css">
 </head>
-<body>
-	<div id="header"><img id = "logo" src="/images/logo.png" ></div>
-	<div id="container">
-		<div id = "control">
-			<a href="/none" underlin = "none">Danh muc sản phẩm</a>
-			<br>
-			<a href="/admin/addProduct">Thêm sản phẩm</a>
-			<br>
-			<a href="/none">Quản lý kho</a>
-			<br>
+<body class="main">
+	<div class="container" >
+		<div class="header bg-dark" width="device-width">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<!-- Brand -->
+				<a class="navbar-brand" href="#"><img src="/images/logo.png" class="logo" style="height: 7vh;"></a>
+
+				<!-- Toggler/collapsibe Button -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- Navbar links -->
+				<div class="collapse navbar-collapse" id="collapsibleNavbar">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="#">Danh mục sản phẩm</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/addProduct">Thêm sản phẩm</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Quản lý kho</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
 		</div>
-		<div id = "body">
-	    {{{ body }}}
+		<div class="body">
+			{{{body}}}
 		</div>
-		<div id="clear"></div>
-    </div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
