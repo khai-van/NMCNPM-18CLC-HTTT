@@ -1,0 +1,29 @@
+#header {
+    position: fixed;
+    z-index: 1;
+}
+#header img {
+    max-height: 50px;
+}
+
+#header .navbar-brand {
+    margin: 0;
+    padding: 0;
+}
+
+#header a {
+    color: white;
+}
+
+/* #header .navbar-nav .nav-item {
+    margin: 0 50px;
+}  */
+
+#header .dropdown-menu li > a {
+    color: black;
+}
+
+
+#slider {
+    padding-top: 58px;
+}
