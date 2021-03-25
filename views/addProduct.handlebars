@@ -1,104 +1,47 @@
-<script>
-    var slideIndex;
-    var loadFile = function(event, ){
-        var file = document.querySelector('input[type=file]').files;
-        var show = document.getElementById('slide');
-        show.innerHTML="";
-        for(var i=0;i<file.length;i++){
-            var img = document.createElement('img'); 
-            img.src = URL.createObjectURL(file[i]);
-            img.className= "image img-responsive fit-image"
-            show.appendChild(img);
-        }
-        show.innerHTML += '  <a class="left" onclick="plusDivs(-1)">&#10094;</a><a class="right" onclick="plusDivs(1)">&#10095;</a>';
-        slideIndex = 1;
-        showDivs(slideIndex);
-    }
-    var plusDivs = function(n) {
-          showDivs(slideIndex += n);
-    }
+<h2 class="card-title text-center title">Thêm sản phẩm</h2>
+      <hr>
+      <!-- form them hang -->
+      <form class="form-add needs-validation" ovalidate>
+        <div class="row">
+          <div class="col-6">
+            <div class="p-0 mt-2">
+              <label for="name" class="form-label"><strong>Tên sản phẩm</strong></label>
+              <input type="text" class="form-control" placeholder="Nhập tên" id="name" name="name" required>
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-0 mt-2">
 
-    var showDivs = function(n) {
-          var i;
-          var x = document.getElementsByClassName("image");
-          if (n > x.length) {slideIndex = 1}
-          if (n < 1) {slideIndex = x.length}
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
-          }
-          x[slideIndex-1].style.display = "block";
-    }
-
-</script>
-
-
-<div  style="padding: 20px">
-    <h4 align="center">Thêm sản phẩm</h4>
-</div>
-{{#if errors}}
-      {{#each errors}}
-      <div class="alert alert-danger">{{msg}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-      {{/each}}
-{{/if}}
-{{#if success}}
-<div class="modal" id="myModal">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title">Thành công</h4>
+              <label for="upload" class="form-label"><strong>Hình sản phẩm</strong></label><br>
+              <input type="file" class="form-control-file" id="upload" multiple="" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg" name="upload" required>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-            Đã thêm sản phẩm thành công.
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-</div>
-</div>
-{{/if}}
-<div>
-    <form method="post" action="/admin/addProduct" enctype="multipart/form-data">
-        <div class="form-row">
-            <div class="col-6 col-sm-6 form-group">
-             <label for="name">Tên sản phẩm</label>
-             <input type="text" class="form-control" placeholder="Nhập tên" id="name" name="name">
-             <label for="price">Giá sản phẩm</label>
-             <input type="text" class="form-control" placeholder="Nhập giá (VNĐ/1sp)" id="price" name="price">
-             <label for="amount">Số lượng</label>
-             <input type="number" class="form-control" placeholder="Nhập số lượng" id="amount" name="amount">
-             <label for="type">Loại</label>
-             <select id="type" class="form-control" name="type">
-               <option selected value="0">Chọn...</option>
-               {{# each productType}}
-               <option value="{{ this }}">{{ this }}</option>
-               {{/each}}
-           </select>
-       </div>
-       <div class="col-6 col-sm-6 form-group" style="margin-bottom: 0rem">
-        <div class="form-group text-center">
-          <label for="upload">Upload ảnh</label>
-          <input type="file" class="form-control-file" id="upload" multiple onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg" name="upload">
-          <div class ="col p-2 text-center" >
-             <div class="d-flex justify-content-center text-center border height100" style="position: relative;">
-              <div  id= "slide" class="d-flex justify-content-center">
-               <img src="/images/noimage.png" class="fit-image" />
+        <div class="row">
+          <div class="mt-2">
+              <label for="price" class="form-label"><strong>Giá sản phẩm</strong></label>
+              <input type="text" class="form-control" placeholder="Nhập giá (VNĐ/1sp)" id="price" name="price" required>
+            </div>
+            <div class="mt-2">
+              <label for="amount" class="form-label"><strong>Số lượng</strong></label>
+              <input type="number" class="form-control" placeholder="Nhập số lượng" id="amount" name="amount" required>
+            </div>
+            <div class="mt-2">
+              <label for="type" class="form-label"><strong>Loại</strong></label>
+              <select id="type" class="form-control" name="type" required>
+               <option selected disabled value="">Chọn...</option>
+               <option value="gundam">gundam</option>
+               <option value="toys">toys</option>
+               <option value="game">game</option>
+             </select>
            </div>
-       </div>
-   </div>
-</div>
-</div>
-</div>
-<div class="form-group">
-    <label for="descript">Mô tả sản phẩm</label>
-    <textarea id="descript" name="descript" class="form-control" rows="5" ></textarea>
-</div>
-<div  class="text-center">
-    <button type="submit" class="btn btn-success me-2" align="center">Thêm sản phẩm</button>
-</div>
-</form>
-</div>
+        </div>
+        <div class="mt-2">
+          <label for="descript" class="form-label"><STRONG>Mô tả</STRONG></label>
+          <textarea class="form-control" placeholder="Ghi mô tả sản phẩm" id="descript" name="descript" style="height: 150px"></textarea>
+
+        </div>
+        <div class="p-0 mt-5 text-center">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+      </form>
