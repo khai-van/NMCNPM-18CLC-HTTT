@@ -27,3 +27,79 @@
 #slider {
     padding-top: 58px;
 }
+
+#slider button {
+    z-index: -1;
+}
+
+#slider .button123 {
+    z-index: -1;
+}
+
+
+#content .title-list-product a{
+    text-transform: uppercase;
+    color: black;
+    
+}
+
+#content .title-list-product a:hover {
+    color: red;
+}
+
+#content .list-product a {
+    white-space: nowrap;
+}
+
+.list-product img {
+    max-width: 100%;
+    height: auto;
+}
+
+.list-product a {
+    text-decoration: none;
+    color: black;
+}
+
+#footer {
+    background-color: blue;
+}
+
+#footer .container li {
+    color: white;
+}
+
+#footer .container li a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+#header .search-btn {
+    
+}
+
+#header .ti-search {
+   
+    color: white;
+    
+}
+
+#header .user-btn {
+ 
+}
+
+#header .ti-user {
+    
+    color: white;
+}
+
+#header .cart-btn {
+    
+}
+
+#header .ti-shopping-cart {
+   
+    color: white;
+}
