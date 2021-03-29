@@ -60,50 +60,59 @@
                 <div class="row justify-content-md-center pt-3 mx-0 ">
                     <img src="./assets/img/Black_Bear1.png" class="img-fluid col-sm-3" width="100" height="100">
                 </div>
-                
+
                 <div class="row justify-content-md-center px-5 pt-5 mx-0">
-                    <h1 class="font-weight-bold py-3">Sign Up</h1>
+                    <h1 class="font-weight-bold py-3">Đăng Ký</h1>
                     <form>
 
                         <div class="form-floating mb-3">
-                            <input type="full name" class="form-control" id="floatingInput" placeholder="Nguyen Van A">
-                            <label for="floatingInput">Full name</label>
+                            <input type="full name" class="form-control" id="floatingInput" placeholder="Nguyen Van A "
+                                oninvalid="this.setCustomValidity('Hãy nhập họ tên')" oninput="setCustomValidity('')" required>
+                            <label for="floatingInput">Họ Tên</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="date" placeholder="birthday" class="form-control" id="floatingInput">
-                            <label for="birthday">Birthday</label>
+                            <input type="date" placeholder="birthday" class="form-control" id="floatingInput"
+                                oninvalid="this.setCustomValidity('Vui lòng điền ngày sinh')" oninput="setCustomValidity('')" required>
+                            <label for="birthday">Ngày Sinh</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ email dạng name@email.com')" oninput="setCustomValidity('')" required>
+                            <label for=" floatingInput">Địa Chỉ Email</label>
                         </div>
 
                         <div class="form-floating mb-1">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                oninvalid="this.setCustomValidity('Hãy tạo mật khẩu')" oninput="setCustomValidity('')"
+                                required>
+                            <label for="floatingPassword">Mật khẩu</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPassword"
-                                placeholder="Comfirm  password">
-                            <label for="floatingPassword">Comfirm password</label>
+                                placeholder="Comfirm password" oninvalid="this.setCustomValidity('Xác nhận mật khẩu')"
+                                oninput="setCustomValidity('')" required>
+                            <label for=" floatingPassword">Xác Nhận Mật Khẩu</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="floatingInput"
-                                placeholder="1234567890">
-                            <label for="floatingInput">Phone number</label>
+                            <input type="number" class="form-control" id="floatingInput" placeholder="1234567890"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')"
+                                oninput="setCustomValidity('')" required>
+                            <label for="floatingInput">Số Điện Thoại</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="address" class="form-control" id="floatingInput" placeholder="Address">
-                            <label for="floatingInput">Address</label>
+                            <input type="address" class="form-control" id="floatingInput" placeholder="Address"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')"
+                                oninput="setCustomValidity('')" required>
+                            <label for="floatingInput">Địa Chỉ</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                                <button type="button" class="btn1 mb-5 mx-0">Create Account</button>
+                            <button type="submit" class="btn1 mb-5 mx-0">Tạo Tài Khoản</button>
                         </div>
                     </form>
                 </div>
