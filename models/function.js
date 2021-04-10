@@ -56,3 +56,20 @@ function getproduct(callback) {
         });
     });
 }
+
+//get information of user with id
+function getinfo_user(id,callback) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        var query = { id: id };
+        dbo.collection("customers").find(query).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            if (result.length == 0) {
+                return callback(-1);
+            }
+            return callback(result);
+        });
+    });
+}
