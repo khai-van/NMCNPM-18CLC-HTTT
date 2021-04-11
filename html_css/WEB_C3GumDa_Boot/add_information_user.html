@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Profile User</title>
+    <link rel="stylesheet" type="text/css" href="global.css">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: gray;
+        }
+
+        .row {
+            background: white;
+            border-radius: 30px;
+        }
+
+        img {
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }
+
+        .btn1 {
+            border: none;
+            outline: none;
+            height: 50px;
+            width: 100%;
+            background-color: black;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .btn1:hover {
+            background: white;
+            border: 1px solid;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="form-row">
+        <div class="container col-lg-5 px-5 pt-3">
+            <div class="row no-gutter">
+                <div class="row justify-content-md-center pt-3 mx-0 ">
+                    <img src="./assets/img/Black_Bear1.png" class="img-fluid col-sm-3" width="100" height="100">
+                </div>
+
+                <div class="row justify-content-md-center px-5 pt-5 mx-0">
+                    <h1 class="font-weight-bold py-3">Thông tin tài khoản</h1>
+                    <form>
+
+                        <div class="form-floating mb-3">
+                            <input type="full name" class="form-control" id="floatingInput" placeholder="Nguyen Van A "
+                                oninvalid="this.setCustomValidity('Hãy nhập họ tên')" oninput="setCustomValidity('')" required>
+                            <label for="floatingInput">Họ Tên</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="date" placeholder="birthday" class="form-control" id="floatingInput"
+                                oninvalid="this.setCustomValidity('Vui lòng điền ngày sinh')" oninput="setCustomValidity('')" required>
+                            <label for="birthday">Ngày Sinh</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ email dạng name@email.com')" oninput="setCustomValidity('')" required>
+                            <label for=" floatingInput">Địa Chỉ Email</label>
+                        </div>
+
+                        <div class="form-floating mb-1">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                oninvalid="this.setCustomValidity('Hãy tạo mật khẩu')" oninput="setCustomValidity('')"
+                                required>
+                            <label for="floatingPassword">Mật khẩu</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword"
+                                placeholder="Comfirm password" oninvalid="this.setCustomValidity('Xác nhận mật khẩu')"
+                                oninput="setCustomValidity('')" required>
+                            <label for=" floatingPassword">Xác Nhận Mật Khẩu</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="floatingInput" placeholder="1234567890"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')"
+                                oninput="setCustomValidity('')" required>
+                            <label for="floatingInput">Số Điện Thoại</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="address" class="form-control" id="floatingInput" placeholder="Address"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')"
+                                oninput="setCustomValidity('')" required>
+                            <label for="floatingInput">Địa Chỉ</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <button type="submit" class="btn1 mb-5 mx-0">Tạo Tài Khoản</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
