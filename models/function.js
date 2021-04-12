@@ -4,7 +4,7 @@ var url = "mongodb://localhost:27017/";
 
 //register account
 function register(name,date,email,pass,number,address,callback) {
-    MongoClient.connect(url, function (err, db) {
+    MongoClient.connect(url,{ useUnifiedTopology: true } ,function (err, db) {
         if (err) throw err;
         var random_id = 'KH' + Math.floor((Math.random() * 1000000) + 1);
         var dbo = db.db("mydb");
@@ -20,7 +20,7 @@ function register(name,date,email,pass,number,address,callback) {
                 dbo.collection("customers").insertOne(myobj, function (err, res) {
                     if (err) throw err;
                     db.close();
-                    return callback(0); // register success
+                    return callback(1); // register success
                 });
             }
         });
@@ -29,7 +29,7 @@ function register(name,date,email,pass,number,address,callback) {
 
 //check login
 function login(username, pass, callback) {
-    MongoClient.connect(url, function (err, db) {
+    MongoClient.connect(url,{ useUnifiedTopology: true }, function (err, db) {
         if (err) throw err;
         var dbo = db.db("mydb");
         var query = { email: username, password: pass };
@@ -73,3 +73,5 @@ function getinfo_user(id,callback) {
         });
     });
 }
+
+module.exports = {register ,login};

@@ -42,7 +42,7 @@
 
 </div>
 <div class="p-0 mt-5 text-center">
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <button type="submit" class="btn btn-primary">Thêm</button>
 </div>
 </form>
 
@@ -87,7 +87,7 @@
       success: async function(data){
 
         console.log(data);
-        await sleep(2000);
+        await sleep(1000);
         $("#spinner").hide();
         $("#closed").prop("disabled", false);
         $("#button-closed").text("Đóng");

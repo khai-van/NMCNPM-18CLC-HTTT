@@ -5,14 +5,29 @@ var router = express.Router();
 var upload = multer();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-	res.render('admin', {mode:0, layout: 'admin_layout'});
+router.get('/', function (req, res, next) {
+	if (req.session.User != "admin") {
+
+		res.redirect("/signin");
+	}
+	res.render('admin', {
+		mode: 0,
+		layout: 'admin_layout'
+	});
 });
-router.get('/addProduct', function(req, res) {
-	res.render('addProduct', {mode:1, layout: 'admin_layout', productType: ["gundam","toys","game"]});
+router.get('/addProduct', function (req, res) {
+	if (req.session.User != "admin") {
+
+		res.redirect("/signin");
+	}
+	res.render('addProduct', {
+		mode: 1,
+		layout: 'admin_layout',
+		productType: ["gundam", "toys", "game"]
+	});
 });
 
-router.post("/addProduct", upload.array('upload',10), (req, res) => {
+router.post("/addProduct", upload.array('upload', 10), (req, res) => {
 	var name = req.body.name;
 	var price = req.body.price;
 	var amount = req.body.amount;
@@ -23,7 +38,7 @@ router.post("/addProduct", upload.array('upload',10), (req, res) => {
 	console.log(req.files);
 
 
-	
+
 	/*var dir = "./public/images/"+name;
 
 	try {
@@ -41,8 +56,10 @@ router.post("/addProduct", upload.array('upload',10), (req, res) => {
 	}
 	res.render('addProduct',{
 		mode: 1,success: true, layout: 'adminLayout', productType: ["gundam","toys","game"]});*/
-	res.status(200).send({state: "success"});
-
+	res.status(200).send({
+		state: "success"
 	});
+
+});
 
 module.exports = router;
