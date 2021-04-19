@@ -3,8 +3,10 @@
     "",
     "\\html_css",
     "\\html_css\\WEB_C3GumDa_Boot",
-    "\\models"
+    "\\models",
+    "\\public",
+    "\\routes"
   ],
-  "SelectedNode": "\\html_css\\WEB_C3GumDa_Boot\\index.html",
+  "SelectedNode": "\\models\\products.js",
   "PreviewInSolutionExplorer": false
 }
