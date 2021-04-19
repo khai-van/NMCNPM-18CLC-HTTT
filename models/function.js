@@ -7,7 +7,7 @@ function register(name,date,email,pass,number,address,callback) {
     MongoClient.connect(url,{ useUnifiedTopology: true } ,function (err, db) {
         if (err) throw err;
         var random_id = 'KH' + Math.floor((Math.random() * 1000000) + 1);
-        var dbo = db.db("mydb");
+        var dbo = db.db("QuanLyCuaHang");
         var check = login(email, pass, function (result) {
             if (result != -1) {
                 db.close();
@@ -31,7 +31,7 @@ function register(name,date,email,pass,number,address,callback) {
 function login(username, pass, callback) {
     MongoClient.connect(url,{ useUnifiedTopology: true }, function (err, db) {
         if (err) throw err;
-        var dbo = db.db("mydb");
+        var dbo = db.db("QuanLyCuaHang");
         var query = { email: username, password: pass };
         dbo.collection("Customers").find({ email: username, password: pass }).toArray(function (err, result) {
             if (err) throw err;
@@ -46,10 +46,15 @@ function login(username, pass, callback) {
 
 // get all product in database
 function getproduct(callback) {
-    MongoClient.connect(url, function (err, db) {
+    MongoClient.connect(url, { useUnifiedTopology: true },function (err, db) {
         if (err) throw err;
+<<<<<<< HEAD
         var dbo = db.db("mydb");
         dbo.collection("Products").find().toArray(function (err, result) {
+=======
+        var dbo = db.db("QuanLyCuaHang");
+        dbo.collection("products").find().toArray(function (err, result) {
+>>>>>>> 1ff6b1f36ccde1525d4f7386566e6dc68fa38a5b
             if (err) throw err;
             db.close();
             return callback(result);
@@ -59,9 +64,9 @@ function getproduct(callback) {
 
 //get information of user with id
 function getinfo_user(id,callback) {
-    MongoClient.connect(url, function (err, db) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
         if (err) throw err;
-        var dbo = db.db("mydb");
+        var dbo = db.db("QuanLyCuaHang");
         var query = { id: id };
         dbo.collection("Customers").find(query).toArray(function (err, result) {
             if (err) throw err;
@@ -74,4 +79,4 @@ function getinfo_user(id,callback) {
     });
 }
 
-module.exports = {register ,login};
+module.exports = { register, login, getproduct, getinfo_user };

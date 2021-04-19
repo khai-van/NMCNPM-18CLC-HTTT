@@ -38,4 +38,7 @@ function addProduct(product, callback) {
   });
 }
 
-module.exports = {findProduct, addProduct}
+module.exports = {
+  findProduct,
+  addProduct
+}
