@@ -23,25 +23,22 @@ router.post("/signin", function (req, res, next) {
   var email = req.body.email;
   var pass = req.body.password;
 
-  if(email =="admin@gmail.com")
-  {
+  if (email == "admin@gmail.com") {
     req.session.User = "admin";
     res.redirect("/admin");
+  } else {
+    userModel.login(email, pass, (result) => {
+      if (result != -1) {
+        req.session.User = result;
+        res.redirect(req.session.previous);
+
+      } else
+        res.render('signin', {
+          notif: true,
+          content: 'Email hoặc mật khẩu không đúng!'
+        });
+    });
   }
-
-  userModel.login(email, pass, (result) => {
-    if (result!=-1) {
-      req.session.User = {
-        result
-      };
-      res.redirect(req.session.previous);
-
-    } else
-      res.render('signin', {
-        notif: true,
-        content: 'Email hoặc mật khẩu không đúng!'
-      });
-  });
 });
 
 router.post("/signup", function (req, res, next) {
@@ -53,7 +50,6 @@ router.post("/signup", function (req, res, next) {
   var address = req.body.address;
 
   userModel.register(name, dob, email, pass, phone, address, (result) => {
-    console.log(result);
     if (result == 1) {
       res.render('signin', {
         notif: true,

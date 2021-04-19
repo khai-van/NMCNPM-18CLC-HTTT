@@ -1,104 +1,190 @@
-<h2 class="card-title text-center title">Thêm sản phẩm</h2>
-<hr>
-<!-- form them hang -->
-<form id="upload-form" class="form-add needs-validation" method="POST" enctype="multipart/form-data" ovalidate>
-  <div class="row">
-    <div class="col-6">
-      <div class="p-0 mt-2">
-        <label for="name" class="form-label"><strong>Tên sản phẩm</strong></label>
-        <input type="text" class="form-control" placeholder="Nhập tên" id="name" name="name" required>
+<div class="container">
+  <h2 class="card-title text-center title"><b>THÊM SẢN PHẨM</b></h2>
+  <hr>
+  <!-- form them hang -->
+  <form id="upload-form" class="form-add needs-validation" method="POST" enctype="multipart/form-data" ovalidate>
+    <div class="row">
+      <div class="col-7">
+        <div class="mt-2">
+          <label for="name" class="form-label"><strong>Tên sản phẩm</strong></label>
+          <input type="text" class="form-control" placeholder="Nhập tên" id="name" name="name" required>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mt-2">
+              <label for="price" class="form-label"><strong>Giá sản phẩm</strong></label>
+              <input type="number" class="form-control" placeholder="Nhập giá (VNĐ/1sp)" id="price" name="price"
+                required>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mt-2">
+              <label for="amount" class="form-label"><strong>Số lượng</strong></label>
+              <input type="number" class="form-control" placeholder="Nhập số lượng" id="amount" name="amount" required>
+            </div>
+          </div>
+        </div>
+        <div class="mt-2">
+          <label for="type" class="form-label"><strong>Loại</strong></label>
+          <select id="type" class="form-control" name="type" required>
+            <option selected disabled value="">Chọn...</option>
+            {{#each productType}}
+            <option value={{this}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="mt-2" style="height: 100%">
+          <label for="descript" class="form-label"><STRONG>Mô tả</STRONG></label>
+          <textarea class="form-control" placeholder="Ghi mô tả sản phẩm" id="descript" name="descript"
+            style="height: 83.5%" required></textarea>
+
+        </div>
       </div>
     </div>
-    <div class="col">
-      <div class="p-0 mt-2">
+    <fieldset class="form-group mt-2">
+      <label for="upload" class="form-label"><strong>Hình sản phẩm</strong></label><br>
+      <input type="file" class="form-control-file" id="upload" accept="image/x-png,image/gif,image/jpeg" name="upload"
+        multiple required>
 
-        <label for="upload" class="form-label"><strong>Hình sản phẩm</strong></label><br>
-        <input type="file" class="form-control-file" id="upload" multiple="" accept="image/x-png,image/gif,image/jpeg" name="upload" required>
+    </fieldset>
+    <div class="preview-images-zone">
+
+    </div>
+
+    <div class="p-0 mt-5 text-center">
+      <button type="submit" class="btn btn-primary">Thêm</button>
+    </div>
+  </form>
+
+  <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Thông báo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body" id="notif">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closed" class="btn btn-secondary" data-dismiss="modal" disabled>
+            <span id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            <span id="button-closed">
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="mt-2">
-      <label for="price" class="form-label"><strong>Giá sản phẩm</strong></label>
-      <input type="text" class="form-control" placeholder="Nhập giá (VNĐ/1sp)" id="price" name="price" required>
-    </div>
-    <div class="mt-2">
-      <label for="amount" class="form-label"><strong>Số lượng</strong></label>
-      <input type="number" class="form-control" placeholder="Nhập số lượng" id="amount" name="amount" required>
-    </div>
-    <div class="mt-2">
-      <label for="type" class="form-label"><strong>Loại</strong></label>
-      <select id="type" class="form-control" name="type" required>
-       <option selected disabled value="">Chọn...</option>
-       {{#each productType}}
-       <option value={{this}}>{{this}}</option>
-       {{/each}}
-     </select>
-   </div>
- </div>
- <div class="mt-2">
-  <label for="descript" class="form-label"><STRONG>Mô tả</STRONG></label>
-  <textarea class="form-control" placeholder="Ghi mô tả sản phẩm" id="descript" name="descript" style="height: 150px"></textarea>
+</div>
+<style>
+  .preview-images-zone {
+    width: 100%;
+    border: 1px solid #ddd;
+    min-height: 180px;
+    /* display: flex; */
+    padding: 5px 5px 0px 5px;
+    position: relative;
+    overflow: auto;
+  }
 
-</div>
-<div class="p-0 mt-5 text-center">
-  <button type="submit" class="btn btn-primary">Thêm</button>
-</div>
-</form>
+  .preview-images-zone>.preview-image {
+    height: 185px;
+    width: 185px;
+    position: relative;
+    margin-right: 5px;
+    float: left;
+    margin-bottom: 5px;
+  }
 
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">Thông báo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="notif">
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="closed" class="btn btn-secondary" data-bs-dismiss="modal" disabled>
-          <span id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-          <span id="button-closed"> 
-          </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+  .preview-images-zone>.preview-image>.image-zone {
+    width: 100%;
+    height: 100%;
+  }
+
+  .preview-images-zone>.preview-image>.image-zone>img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .preview-image:hover>.image-zone {
+    cursor: move;
+    opacity: .5;
+  }
+</style>
 
 <script>
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  $("#upload-form").submit(function(e) {
-    e.preventDefault();
-    $("#Modal").modal("show");
-    $("#spinner").show();
-    $("#closed").prop("disabled", true);
-    $("#notif").text("Loading...");
-    $("#button-closed").text("Loading...");
-    $.ajax({
-      url: "/admin/addProduct",
-      type: "POST",
-      data: new FormData(this),
-      contentType: false,
-      cache: false,
-      processData:false,
-      success: async function(data){
+  $(document).ready(() => {
+    document.getElementById('upload').addEventListener('change', readImage, false);
 
-        console.log(data);
-        await sleep(1000);
-        $("#spinner").hide();
-        $("#closed").prop("disabled", false);
-        $("#button-closed").text("Đóng");
-        if(data.state =="success"){
-          $("#notif").text("Đã thêm sản phẩm thành công");
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    $("#upload-form").submit(function (e) {
+      e.preventDefault();
+      $("#Modal").modal("show");
+      $("#spinner").show();
+      $("#closed").prop("disabled", true);
+      $("#notif").text("Loading...");
+      $("#button-closed").text("Loading...");
+
+      $.ajax({
+        url: "/admin/addProduct",
+        type: "POST",
+
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: async function (data) {
+
+          console.log(data);
+          await sleep(500);
+          $("#spinner").hide();
+          $("#closed").prop("disabled", false);
+          $("#button-closed").text("Đóng");
+          if (data.state == "success") {
+            $("#notif").text("Đã thêm sản phẩm thành công");
+          } else {
+            $("#notif").text(
+              "Không thể thêm sản phẩm do đã tồn tại sản phẩm"
+            );
+          }
         }
-        else{
-          $("#notif").text("...");
-        }
-      }
+      });
     });
   });
+  var num;
 
+  function readImage() {
+
+    if (window.File && window.FileList && window.FileReader) {
+      num = 0;
+      var files = event.target.files; //FileList object
+      var output = $(".preview-images-zone");
+      output.html("");
+      for (let i = 0; i < files.length; i++) {
+        var file = files[i];
+        if (!file.type.match('image')) continue;
+
+        var picReader = new FileReader();
+
+        picReader.addEventListener('load', function (event) {
+          var picFile = event.target;
+          var html = '<div class="preview-image preview-show-' + num + '">' +
+            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result +
+            '"></div>' +
+            '</div>';
+
+          output.append(html);
+          num = num + 1;
+        });
+
+        picReader.readAsDataURL(file);
+      }
+
+    }
+  }
 </script>
