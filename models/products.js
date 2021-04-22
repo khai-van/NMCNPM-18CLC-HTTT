@@ -57,7 +57,12 @@ function Purchase(list_items,id_cus, callback) {
         var total = 0;
         var random_bill = 'B' + Math.floor((Math.random() * 1000000) + 1);
         //Kiểm tra còn đủ số lượng sản phẩm để bán không?
- 
+        for (items in list_items) {
+            get_amount(items.id, function (result) {
+                if (result < items.amount)
+                    return callback(items); // trả về sản phẩm hết hàng
+            });
+        }
         //Cập nhật lại số lượng sản phẩm còn lại và tính tổng tiền
         for (items in list_items) {
             get_amount(items.id, function (result) {

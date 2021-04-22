@@ -79,4 +79,25 @@ function getinfo_user(id,callback) {
     });
 }
 
-module.exports = { register, login, getproduct, getinfo_user };
+//update information of customers
+function updateinfouser(user,callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        getinfo_user(user.id, function (result) {
+            if (result == -1)
+                return callback(0); // user not created in database
+        };
+        var dbo = db.db("QuanLyCuaHang");
+        var myquery = { id: user.id };
+        var newvalues = {
+            $set: { name: user.name, date: new Date(user.date), email: user.email, pass: user.pass, number: user.number, address: user.address }
+        };
+        dbo.collection("customers").updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+            db.close();
+            return callback(1); // updated
+        });
+    });
+};
+
+module.exports = { register, login, getproduct, getinfo_user,updateinfouser };
