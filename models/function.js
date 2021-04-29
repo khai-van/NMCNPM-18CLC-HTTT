@@ -48,13 +48,8 @@ function login(username, pass, callback) {
 function getproduct(callback) {
     MongoClient.connect(url, { useUnifiedTopology: true },function (err, db) {
         if (err) throw err;
-<<<<<<< HEAD
-        var dbo = db.db("mydb");
-        dbo.collection("Products").find().toArray(function (err, result) {
-=======
         var dbo = db.db("QuanLyCuaHang");
         dbo.collection("products").find().toArray(function (err, result) {
->>>>>>> 1ff6b1f36ccde1525d4f7386566e6dc68fa38a5b
             if (err) throw err;
             db.close();
             return callback(result);

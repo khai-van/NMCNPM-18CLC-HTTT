@@ -5,90 +5,15 @@ var fs = require("fs");
 var router = express.Router();
 var upload = multer();
 
-var Product = require("../models/product")
+var admin_controller = require('../controllers/admin');
+var product_controller = require('../controllers/product');
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/', admin_controller.admin_detail);
 
-	if (req.session.User == "admin") {
-		res.render('admin', {
-			mode: 0,
-			layout: 'admin_layout'
-		});
-	} else {
-		res.redirect("/signin");
-	}
-});
-router.get('/addProduct', function (req, res) {
-	if (req.session.User == "admin") {
-		res.render('addProduct', {
-			mode: 1,
-			layout: 'admin_layout',
-			productType: ["gundam", "toys", "game"]
-		});
-	} else {
-		res.redirect("/signin");
-	}
+router.get('/addProduct',admin_controller.addProductForm);
 
-});
-router.get('/products', function (req, res) {
-	if (req.session.User == "admin") {
-		res.render('products', {
-			mode: 0,
-			layout: 'admin_layout',
-			productType: ["gundam", "toys", "game"]
-		});
-	} else {
-		res.redirect("/signin");
-	}
+router.get('/products', product_controller.productsManage);
 
-});
-
-router.post("/addProduct", upload.array('upload', 10), (req, res) => {
-	var product = req.body;
-
-	
-	
-	product.price = product.price.toLocaleString('it-IT', {
-		style: 'currency',
-		currency: 'VND'
-	});
-
-	product.files = [];
-	for (var i = 0; i < req.files.length; i++) {
-		product.files.push("/images/products" + product.name + "/" + i + ".jpg");
-	}
-	Product.addProduct(product, (result) => {
-		console.log(result);
-		if (result) {
-			var dir = "./public/images/products/" + product.name;
-			try {
-				if (!fs.existsSync(dir)) {
-					fs.mkdirSync(dir)
-				}
-			} catch (err) {
-				console.error(err)
-			}
-
-			for (var i = 0; i < req.files.length; i++) {
-				fs.writeFile(dir + "/" + i + ".jpg", req.files[i].buffer, 'binary', function (err) {
-					console.log(err);
-				});
-			}
-			res.status(200).send({
-				state: "success"
-			});
-		} else {
-			res.status(200).send({
-				state: "fail"
-			});
-		}
-	});
-
-
-
-
-
-});
+router.post("/addProduct", upload.array('upload', 10), product_controller.addProduct);
 
 module.exports = router;

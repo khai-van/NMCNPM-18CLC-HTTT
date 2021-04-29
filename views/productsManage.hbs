@@ -1,0 +1,324 @@
+<h2 class="card-title text-center title"><b>DANH MỤC SẢN PHẨM</b></h2>
+<hr>
+<div>
+    <input class="form-control" id="myInput" type="text" placeholder="Tìm kiếm sản phẩm">
+    <div class="row px-5 py-2 justify-content-end">
+        <div class="col col-md-auto"><b>Loại:</b></div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input" id="1" name="1" value="customEx">
+            <label class="custom-control-label" for="1">Loại 1</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input" id="2" name="2" value="customEx">
+            <label class="custom-control-label" for="2">Loại 2</label>
+        </div>
+    </div>
+
+</div>
+<div class="list container-fluid ">
+    <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+            <tr class=" d-flex">
+                <th class="col-1">#</th>
+                <th class="col-4">Tên sản phẩm</th>
+                <th class="col-3">Loại</th>
+                <th class="col-3">Giá</th>
+                <th class="col-1">SL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each listProducts}}
+            <tr class="accordion-toggle d-flex" tr data-toggle="collapse" data-target="#{{this.id}}">
+                <td class="col-1">{{this.id}}</td>
+                <td class="col-4">{{this.name}}</td>
+                <td class="col-3">{{this.type}}</td>
+                <td class="col-3 price-tag">{{this.price}}</td>
+                <td class="col-1">{{this.amount}}</td>
+            </tr>
+            <tr class="info">
+                <td colspan="5" class="hiddenRow">
+                    <div id="{{this.id}}" class="container accordian-body collapse">
+                        <hr>
+                        <form class="form-add">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="mt-2">
+                                        <label for="name" class="form-label"><strong>Tên sản
+                                                phẩm</strong></label>
+                                        <input type="text" class="form-control name" placeholder="{{this.name}}"
+                                            name="name" disabled>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mt-2">
+                                                <label for="price" class="form-label"><strong>Giá sản
+                                                        phẩm</strong></label>
+                                                <input type="number" class="form-control price"
+                                                    placeholder="{{this.price}}" name="price" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mt-2">
+                                                <label for="amount" class="form-label"><strong>Số
+                                                        lượng</strong></label>
+                                                <input type="number" class="form-control amount"
+                                                    placeholder="{{this.amount}}" name="amount" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label for="type" class="form-label"><strong>Loại</strong></label>
+                                        <select class="form-control type" name="type" disabled>
+                                            <option selected disabled value="{{this.type}}">{{this.type}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="mt-2" style="height: 100%">
+                                        <label for="descript" class="form-label"><STRONG>Mô
+                                                tả</STRONG></label>
+                                        <textarea class="form-control descript" placeholder="{{this.descript}}"
+                                            name="descript" style="height: 83.5%" disabled></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="preview-images-zone">
+                                {{#each this.files}}
+                                <div class="preview-image preview-show-{{@index}}">
+                                    <div class="image-zone"><img id="pro-img-{{@index}}" src="{{this}}">
+                                    </div>
+                                </div>
+                                {{/each}}
+
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="p-1 my-2 text-right">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal"
+                                data-whatever="{{this.id}}">Cập nhật</button>
+                        </div>
+                        <hr>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+
+
+        </tbody>
+    </table>
+    <!--modal-->
+    <div id="modal" class="modal fade" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Cập nhật</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--form in modal-->
+                    <form id="upload-form" class="form-add needs-validation" method="POST" enctype="multipart/form-data"
+                        ovalidate>
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="mt-2">
+                                    <label for="name" class="form-label"><strong>Tên sản
+                                            phẩm</strong></label>
+                                    <input type="text" class="form-control" placeholder="Nhập tên" id="name" name="name"
+                                        required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mt-2">
+                                            <label for="price" class="form-label"><strong>Giá sản
+                                                    phẩm</strong></label>
+                                            <input type="number" class="form-control" placeholder="Nhập giá (VNĐ/1sp)"
+                                                id="price" name="price" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-2">
+                                            <label for="amount" class="form-label"><strong>Số
+                                                    lượng</strong></label>
+                                            <input type="number" class="form-control" placeholder="Nhập số lượng"
+                                                id="amount" name="amount" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <label for="type" class="form-label"><strong>Loại</strong></label>
+                                    <select id="type" class="form-control" name="type" required>
+                                        <option selected disabled value="">Chọn...</option>
+                                        {{#each productType}}
+                                        <option value={{this}}>{{this}}</option>
+                                        {{/each}}
+                                        <option value="gundam1">gundam1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="mt-2" style="height: 100%">
+                                    <label for="descript" class="form-label"><STRONG>Mô tả</STRONG></label>
+                                    <textarea class="form-control" placeholder="Ghi mô tả sản phẩm" id="descript"
+                                        name="descript" style="height: 83.5%" required></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!--form in modal-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#upload-form').submit()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal-->
+</div>
+</div>
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title update-" id="ModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" id="notif">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closed" class="btn btn-secondary" data-dismiss="modal" disabled>
+                    <span id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    <span id="button-closed">
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    .info:hover {
+        background-color: #f8f9fa !important
+    }
+
+    .hiddenRow {
+        padding: 0 !important;
+    }
+
+    .preview-images-zone {
+        width: 100%;
+        border: 1px solid #ddd;
+        min-height: 180px;
+        /* display: flex; */
+        padding: 5px 5px 0px 5px;
+        position: relative;
+        overflow: auto;
+    }
+
+    .preview-images-zone>.preview-image:first-child {
+        height: 185px;
+        width: 185px;
+        position: relative;
+        margin-right: 5px;
+    }
+
+    .preview-images-zone>.preview-image {
+        height: 90px;
+        width: 90px;
+        position: relative;
+        margin-right: 5px;
+        float: left;
+        margin-bottom: 5px;
+    }
+
+    .preview-images-zone>.preview-image>.image-zone {
+        width: 100%;
+        height: 100%;
+    }
+
+    .preview-images-zone>.preview-image>.image-zone>img {
+        width: 100%;
+        height: 100%;
+    }
+
+
+
+    .preview-image:hover>.image-zone {
+        cursor: move;
+        opacity: .5;
+    }
+
+    .preview-image:hover>.image-cancel {
+        display: block;
+    }
+</style>
+<script>
+    $(document).ready(() => {
+        $('#modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('whatever')
+            var modal = $(this)
+            var info = $("#" + recipient);
+
+            //modal.find(".");
+
+            var name = info.find(".name").attr("placeholder");
+            var price = info.find(".price").attr("placeholder");
+            var amount = info.find(".amount").attr("placeholder");
+            var description = info.find(".descript").attr("placeholder");
+            var type = info.find("option").attr("value");
+
+            var priceFloat = parseFloat(price.replace(/[^0-9-.]/g, ''));
+
+            modal.find("#name").val(name);
+            modal.find("#price").val(priceFloat);
+            modal.find("#amount").val(amount);
+            modal.find("#descript").val(description);
+            modal.find("option[value='" + type + "']").prop('selected', true);
+        });
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        $("#upload-form").submit(function (e) {
+            e.preventDefault();
+            $("#modal").modal("hide");
+            $("#Modal").modal("show");
+            $("#spinner").show();
+            $("#closed").prop("disabled", true);
+            $("#notif").text("Loading...");
+            $("#button-closed").text("Loading...");
+
+
+            $.ajax({
+                url: "/admin/adjustProduct",
+                type: "POST",
+
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: async function (data) {
+                    await sleep(500);
+                    $("#spinner").hide();
+                    $("#closed").prop("disabled", false);
+                    $("#button-closed").text("Đóng");
+                    if (data.state == "success") {
+                        $("#notif").text("Đã cập nhật sản phẩm thành công");
+                    } else {
+                        $("#notif").text(
+                            "Không thể cập nhật sản phẩm, xin hãy thử lại sau"
+                        );
+                    }
+                }
+            });
+        });
+    });
+</script>

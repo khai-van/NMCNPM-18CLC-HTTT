@@ -23,12 +23,12 @@
 		<div class="col vertical-nav" id="sidebar">
 			<div class="pt-3 pd-1 px-3">
 				<a href="/admin" target="_blank" rel="noopener noreferrer">
-					<div class="media d-flex align-items-center"><img src="./images/logo.png" alt="..." width="70"
+					<div class="media d-flex align-items-center"><img src="/images/logo.png" alt="..." width="70"
 							class="rounded mx-auto d-block">
 					</div>
 				</a>
 			</div>
-			<hr style="border: 1px solid gray; width:90%">
+			<hr style="border: 1px solid #f1f5f9; width:90%">
 
 			<ul class="nav nav-pills flex-column pt-3 mb-auto">
 				<li class="nav-item"><a href="/admin/products" class="nav-link text-white"><svg class="bi me-2"
@@ -38,7 +38,7 @@
 				<li><a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Quản lý
 						đơn hàng</a></li>
 			</ul>
-			<hr style="border: 1px solid gray; width:90%">
+			<hr style="border: 1px solid #f1f5f9; width:90%">
 			<div class="footer"><a class="nav-link text-white" href="/admin/logout"><strong>Đăng xuất</strong></a></div>
 
 		</div>
@@ -58,21 +58,24 @@
 
 		<style>
 			.vertical-nav {
-				min-width: 17rem;
-				width: 17rem;
+				min-width: 18rem;
+				width: 18rem;
 				height: 100vh;
 				position: fixed;
 				box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-				background-color: #212529;
+				background-color: #212529; 
+				padding-left: 25px;
 			}
 
 			.page-content {
 				width: calc(100% - 17rem);
 				margin-left: 17rem;
+				height: 100vh;
+				background-color: #f1f8f9;
 			}
 
 			#sidebar.active {
-				margin-left: -17rem;
+				margin-left: -17rem; !important
 			}
 
 			#content.active {
@@ -82,7 +85,7 @@
 
 			@media (max-width: 768px) {
 				#sidebar {
-					margin-left: -17rem;
+					margin-left: -17rem; !important
 				}
 
 				#sidebar.active {

@@ -46,7 +46,7 @@
     <fieldset class="form-group mt-2">
       <label for="upload" class="form-label"><strong>Hình sản phẩm</strong></label><br>
       <input type="file" class="form-control-file" id="upload" accept="image/x-png,image/gif,image/jpeg" name="upload"
-        multiple required>
+        multiple>
 
     </fieldset>
     <div class="preview-images-zone">
@@ -90,9 +90,16 @@
     overflow: auto;
   }
 
-  .preview-images-zone>.preview-image {
+  .preview-images-zone>.preview-image:first-child {
     height: 185px;
     width: 185px;
+    position: relative;
+    margin-right: 5px;
+  }
+
+  .preview-images-zone>.preview-image {
+    height: 90px;
+    width: 90px;
     position: relative;
     margin-right: 5px;
     float: left;
@@ -109,15 +116,45 @@
     height: 100%;
   }
 
+
+  .preview-images-zone>.preview-image>.image-cancel {
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    display: none;
+    z-index: 100;
+  }
+
   .preview-image:hover>.image-zone {
     cursor: move;
     opacity: .5;
+  }
+
+  .preview-image:hover>.image-cancel {
+    display: block;
   }
 </style>
 
 <script>
   $(document).ready(() => {
     document.getElementById('upload').addEventListener('change', readImage, false);
+
+    $(document).on('click', '.image-cancel', function () {
+      let no = $(this).data('no');
+      list_img[no] = null;
+      $(".preview-image.preview-show-" + no).remove();
+      const dt = new DataTransfer();
+      for (i in list_img) {
+        if (list_img[i]) {
+          dt.items.add(list_img[i]);
+        }
+        $("#upload")[0].files = dt.files;
+      }
+    });
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -130,6 +167,7 @@
       $("#notif").text("Loading...");
       $("#button-closed").text("Loading...");
 
+
       $.ajax({
         url: "/admin/addProduct",
         type: "POST",
@@ -139,9 +177,6 @@
         cache: false,
         processData: false,
         success: async function (data) {
-
-          console.log(data);
-          await sleep(500);
           $("#spinner").hide();
           $("#closed").prop("disabled", false);
           $("#button-closed").text("Đóng");
@@ -156,35 +191,41 @@
       });
     });
   });
-  var num;
+  var num = 0;
+  var list_img = [];
 
   function readImage() {
 
     if (window.File && window.FileList && window.FileReader) {
-      num = 0;
       var files = event.target.files; //FileList object
       var output = $(".preview-images-zone");
-      output.html("");
+
       for (let i = 0; i < files.length; i++) {
         var file = files[i];
-        if (!file.type.match('image')) continue;
+        list_img.push(file);
 
         var picReader = new FileReader();
 
         picReader.addEventListener('load', function (event) {
           var picFile = event.target;
           var html = '<div class="preview-image preview-show-' + num + '">' +
-            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result +
-            '"></div>' +
+            '<div class="image-cancel" data-no="' + num + '">x</div>' +
+            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
             '</div>';
 
           output.append(html);
-          num = num + 1;
+          num++;
         });
 
         picReader.readAsDataURL(file);
       }
-
+      const dt = new DataTransfer();
+      for (i in list_img) {
+        if (list_img[i]) {
+          dt.items.add(list_img[i]);
+        }
+        event.target.files = dt.files;
+      }
     }
   }
 </script>
