@@ -31,7 +31,7 @@
 			<hr style="border: 1px solid #f1f5f9; width:90%">
 
 			<ul class="nav nav-pills flex-column pt-3 mb-auto">
-				<li class="nav-item"><a href="/admin/products" class="nav-link text-white"><svg class="bi me-2"
+				<li><a href="/admin/products" class="nav-link text-white"><svg class="bi me-2"
 							width="16" height="16"></svg>Danh mục sản phẩm</a></li>
 				<li><a href="/admin/addProduct" class="nav-link text-white"><svg class="bi me-2" width="16"
 							height="16"></svg>Thêm sản phẩm</a></li>
@@ -46,7 +46,7 @@
 	</div>
 	<div class="col container-fluid page-content py-3 px-3" id="content">
 		<button id="sidebarCollapse" type="button"
-			class="btn btn-primary rounded-pill shadow-sm px-4 mb-4">Menu</button>
+			class="btn btn-primary rounded-pill shadow-sm px-4 mb-4" style="position:sticky">Menu</button>
 		<!--Body-->
 		<div class="container p-3 bg-light" style="min-height: 85vh;">
 			{{{body}}}
@@ -57,12 +57,16 @@
 
 
 		<style>
+
+			.nav-pills li:hover{
+				background-color: #007bff;
+			}
 			.vertical-nav {
 				min-width: 18rem;
 				width: 18rem;
 				height: 100vh;
 				position: fixed;
-				box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+				box-shadow: 3px 3px 10px #0000001a;
 				background-color: #212529; 
 				padding-left: 25px;
 			}
@@ -71,7 +75,7 @@
 				width: calc(100% - 17rem);
 				margin-left: 17rem;
 				height: 100vh;
-				background-color: #f1f8f9;
+				background-color: #f2f2f2;
 			}
 
 			#sidebar.active {
@@ -112,8 +116,9 @@
 				$(".page-content").css({
 					"transition": "all 0.4s"
 				});
-
-				document.getElementsByClassName("nav-link")[{{mode}}].classList.add("active");
+				{{#if mode}}
+				document.getElementsByClassName("nav-link")[{{mode}}-1].classList.add("active");
+				{{/if}}
 				$('#sidebarCollapse').on('click', function () {
 					$('#sidebar, #content').toggleClass('active');
 				});

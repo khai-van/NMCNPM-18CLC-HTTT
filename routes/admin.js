@@ -14,6 +14,13 @@ router.get('/addProduct',admin_controller.addProductForm);
 
 router.get('/products', product_controller.productsManage);
 
+router.get("/logout", admin_controller.logOut);
+
 router.post("/addProduct", upload.array('upload', 10), product_controller.addProduct);
+
+router.post("/adjustProduct",upload.array('upload', 1), product_controller.adjustProduct);
+
+
+
 
 module.exports = router;

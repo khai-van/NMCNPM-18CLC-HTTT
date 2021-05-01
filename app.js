@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", shopRouter);
 app.use("/admin", adminRouter);
-app.use("/cus", customerRouter);
+app.use("/user", customerRouter);
 
 app.listen(8000, function () {
   console.log("Server started on port " + 8000);

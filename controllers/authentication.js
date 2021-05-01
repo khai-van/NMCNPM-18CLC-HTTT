@@ -1,4 +1,5 @@
-var customerModel = require("../models/function");
+var customerModel = require("../models/customer");
+ 
 
 exports.signInPage = function (req, res) {
   res.render("signin");
@@ -37,7 +38,7 @@ exports.signUp = function (req, res) {
   var phone = req.body.phone;
   var address = req.body.address;
 
-  userModel.register(name, dob, email, pass, phone, address, (result) => {
+  customerModel.register(name, dob, email, pass, phone, address, (result) => {
     if (result == 1) {
       res.render("signin", {
         notif: true,
