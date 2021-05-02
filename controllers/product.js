@@ -90,7 +90,11 @@ exports.adjustProduct = function (req, res) {
 exports.HomePage = function (req, res) {
   req.session.previous = "/";
   productModel.findProduct({}, (result) => {
-    res.render("index", { products: result });
+    console.log(result);
+    res.render("index", {
+      productType: ["gundam", "toys", "game"],
+      listProducts: result,
+    });
   });
 };
 
@@ -102,12 +106,13 @@ exports.categoryProduct = function (req, res) {
     }
     productModel.findProduct(query, (result) => {
       res.status(200).send({
-        state: result
+        state: result,
       });
     });
   } else {
     productModel.findProduct({}, (result) => {
       var listProducts = result;
+      
       res.render("category", {
         productType: ["gundam", "toys", "game"],
         listProducts: listProducts,
@@ -116,12 +121,15 @@ exports.categoryProduct = function (req, res) {
   }
 };
 
-exports.productPage = function(req,res){
+exports.productPage = function (req, res) {
   if (Object.keys(req.query).length !== 0) {
     var id_product = req.query.id;
-    var query = {id:id};
-    productModel.findProduct(query, (result)=>{
-      res.render("product",{product: result});
+    var query = { id: id };
+    productModel.findProduct(query, (result) => {
+      res.render("product", {
+        productType: ["gundam", "toys", "game"],
+        product: result,
+      });
     });
   }
 };

@@ -20,8 +20,14 @@ exports.signIn = function (req, res) {
     customerModel.login(email, pass, (result) => {
       if (result != -1) {
         req.session.User = result;
-        res.redirect(req.session.previous);
+        if(req.session.previous){
+          res.redirect(req.session.previous);
+        } else{
+          res.redirect("/"); 
+        }
+        
       } else
+
         res.render("signin", {
           notif: true,
           content: "Email hoặc mật khẩu không đúng!",

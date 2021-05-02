@@ -1,12 +1,13 @@
 <div id="slider">
+
 	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 		<div class="carousel-indicators button123">
 			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-				aria-current="true" aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-				aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-				aria-label="Slide 3"></button>
+				aria-label="Slide 1" aria-current="true"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"
+				class=""></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"
+				class=""></button>
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
@@ -32,19 +33,12 @@
 	</div>
 </div>
 
-
 <div id="content">
 
 	<div class="title-list-product ">
 		<ul class="nav">
 			<li class="nav-item">
-				<h3><a class="nav-link active" aria-current="page" href="#">Hot gumdam</a></h3>
-			</li>
-			<li class="nav-item mt-1">
-				<a class="nav-link" href="#">Sản phẩm mới</a>
-			</li>
-			<li class="nav-item mt-1">
-				<a class="nav-link" href="#">Sản phẩm đặt trước</a>
+				<h3><a class="nav-link active" aria-current="page">Sản phẩm nổi bật</a></h3>
 			</li>
 		</ul>
 	</div>
@@ -53,108 +47,34 @@
 	<div class="list-product container">
 		<div class="row pt-2 mx-n2">
 			<!-- Product-->
-			<div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-				<div class="card product-card">
-					<div class="product-card-actions d-flex align-items-center">
-					</div><a class="card-img-top d-block overflow-hidden" href=""><img src="/images/img/item/item1.jpg"
-							alt="Product"></a>
-					<div class="card-body py-2 ">
-						<h3 class="product-title fs-sm text-truncate"><a href="">aaaaaa</a></h3>
-						<div class="d-flex justify-content-between">
-							<div class="product-price"><span class="text-accent">$198.<small>00</small></span></div>
-							<div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i>
-							</div>
-						</div>
-					</div>
-					<div class="card-body card-body-hidden">
-						<button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-								class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-					</div>
-				</div>
-				<hr class="d-sm-none">
-			</div>
-
+			
 			<!-- Product -->
+			{{#each listProducts}}
 			<div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
 				<div class="card product-card">
 					<div class="product-card-actions d-flex align-items-center">
-					</div><a class="card-img-top d-block overflow-hidden" href=""><img src="/images/img/item/item1.jpg"
+					</div><a class="card-img-top d-block overflow-hidden" href=""><img src="{{this.files.[0]}}"
 							alt="Product"></a>
 					<div class="card-body py-2 ">
-						<h3 class="product-title fs-sm text-truncate"><a href="">aaaaaa</a></h3>
+						<h3 class="product-title fs-sm text-truncate"><a href="">{{this.name}}</a></h3>
 						<div class="d-flex justify-content-between">
-							<div class="product-price"><span class="text-accent">$198.<small>00</small></span></div>
-							<div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i>
-							</div>
+							<div class="product-price"><span class="text-accent">{{this.price}}</span></div>
 						</div>
 					</div>
 					<div class="card-body card-body-hidden">
 						<button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-								class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+								class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
 					</div>
 				</div>
 				<hr class="d-sm-none">
 			</div>
-			<!-- Product -->
-			<div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-				<div class="card product-card">
-					<div class="product-card-actions d-flex align-items-center">
-					</div><a class="card-img-top d-block overflow-hidden" href=""><img src="/images/img/item/item1.jpg"
-							alt="Product"></a>
-					<div class="card-body py-2 ">
-						<h3 class="product-title fs-sm text-truncate"><a href="">aaaaaa</a></h3>
-						<div class="d-flex justify-content-between">
-							<div class="product-price"><span class="text-accent">$198.<small>00</small></span></div>
-							<div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i>
-							</div>
-						</div>
-					</div>
-					<div class="card-body card-body-hidden">
-						<button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-								class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-					</div>
-				</div>
-				<hr class="d-sm-none">
-			</div>
-			<!-- Product -->
-			<div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-				<div class="card product-card">
-					<div class="product-card-actions d-flex align-items-center">
-					</div><a class="card-img-top d-block overflow-hidden" href=""><img src="/images/img/item/item1.jpg"
-							alt="Product"></a>
-					<div class="card-body py-2 ">
-						<h3 class="product-title fs-sm text-truncate"><a href="">aaaaaa</a></h3>
-						<div class="d-flex justify-content-between">
-							<div class="product-price"><span class="text-accent">$198.<small>00</small></span></div>
-							<div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i><i
-									class="star-rating-icon ci-star-filled active"></i>
-							</div>
-						</div>
-					</div>
-					<div class="card-body card-body-hidden">
-						<button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-								class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-					</div>
-				</div>
-				<hr class="d-sm-none">
-			</div>
+			{{/each}}
 
 		</div>
 
 	</div>
+
+
+
+
 </div>

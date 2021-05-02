@@ -1,89 +1,127 @@
-<section class="form-row">
-    {{#if notif}}
-    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{content}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                </div>
+{{#if notif}}
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{content}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#Modal').modal('show');
-        });
-    </script>
-    {{/if}}
-    <div class="container col-lg-5 px-5 pt-3">
-        <div class="row no-gutter">
-            <div class="row justify-content-md-center px-5 pt-5 mx-0">
-                <h1 class="font-weight-bold py-3">Đăng Ký</h1>
-                <form action="/signup" method="POST">
-                    <div class="form-floating mb-3">
-                        <input id="name" name="name" type="full name" class="form-control" id="floatingInput"
-                            placeholder="Nguyen Van A " oninvalid="this.setCustomValidity('Hãy nhập họ tên')"
-                            oninput="setCustomValidity('')" required />
-                        <label for="floatingInput">Họ Tên</label>
-                    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Modal').modal('show');
+    });
+</script>
+{{/if}}
 
-                    <div class="form-floating mb-3">
-                        <input id="dob" name="dob" type="date" placeholder="birthday" class="form-control"
-                            id="floatingInput" oninvalid="this.setCustomValidity('Vui lòng điền ngày sinh')"
-                            oninput="setCustomValidity('')" required />
-                        <label for="birthday">Ngày Sinh</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input id="email" name="email" type="email" class="form-control" id="floatingInput"
-                            placeholder="name@example.com"
-                            oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ email dạng name@email.com')"
-                            oninput="setCustomValidity('')" required />
-                        <label for=" floatingInput">Địa Chỉ Email</label>
-                    </div>
-
-                    <div class="form-floating mb-1">
-                        <input name="password" type="password" class="form-control" id="floatingPassword"
-                            placeholder="Password" oninvalid="this.setCustomValidity('Hãy tạo mật khẩu')"
-                            oninput="setCustomValidity('')" required />
-                        <label for="floatingPassword">Mật khẩu</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Comfirm password"
-                            oninvalid="this.setCustomValidity('Xác nhận mật khẩu')" oninput="setCustomValidity('')"
-                            required />
-                        <label for=" floatingPassword">Xác Nhận Mật Khẩu</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input id="phone" name="phone" type="number" class="form-control" id="floatingInput"
-                            placeholder="1234567890" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')"
-                            oninput="setCustomValidity('')" required />
-                        <label for="floatingInput">Số Điện Thoại</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input id="address" name="address" type="address" class="form-control" id="floatingInput"
-                            placeholder="Address" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')"
-                            oninput="setCustomValidity('')" required />
-                        <label for="floatingInput">Địa Chỉ</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <button type="submit" class="btn1 mb-5 mx-0">
-                            Tạo Tài Khoản
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="container con_signup text_all text-center">
+    <div class="row text_3">
+        <h4>ĐĂNG KÝ TÀI KHOẢN</h4>
     </div>
-</section>
+    <hr>
+    <form action="/signup" method="POST">
+        <div class="form-floating mb-3">
+            <input id="name" name="name" type="full name" class="form-control" id="floatingInput"
+                placeholder="Nguyen Van A " oninvalid="this.setCustomValidity('Hãy nhập họ tên')"
+                oninput="setCustomValidity('')" required />
+            <label for="floatingInput">Họ Tên</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="dob" name="dob" type="date" placeholder="birthday" class="form-control" id="floatingInput"
+                oninvalid="this.setCustomValidity('Vui lòng điền ngày sinh')" oninput="setCustomValidity('')"
+                required />
+            <label for="birthday">Ngày Sinh</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="email" name="email" type="email" class="form-control" id="floatingInput"
+                placeholder="name@example.com"
+                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ email dạng name@email.com')"
+                oninput="setCustomValidity('')" required />
+            <label for=" floatingInput">Địa Chỉ Email</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                oninvalid="this.setCustomValidity('Hãy tạo mật khẩu')" oninput="setCustomValidity('')" required />
+            <label for="floatingPassword">Mật khẩu</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="phone" name="phone" type="number" class="form-control" id="floatingInput"
+                placeholder="1234567890" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')"
+                oninput="setCustomValidity('')" required />
+            <label for="floatingInput">Số Điện Thoại</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input id="address" name="address" type="address" class="form-control" id="floatingInput"
+                placeholder="Address" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')"
+                oninput="setCustomValidity('')" required />
+            <label for="floatingInput">Địa Chỉ</label>
+        </div>
+
+        <button type="submit" class="btn_dn fw-bold btn btn-primary">TẠO TÀI KHOẢN</button>
+
+        <div class="fw-bold" style="text-align:center; margin-top: 10px">
+            <a href="/signin">ĐĂNG NHẬP</a>
+        </div>
+    </form>
+
+</div>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    a.qmk {
+        color: rgb(79, 178, 195);
+    }
+
+    a.qmk:hover {
+        color: gray;
+    }
+
+    .btn_dn {
+        background-color: red;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+    }
+
+
+    .btn_dn:hover {
+        background-color: rgb(194, 79, 79);
+
+    }
+
+    .text_all {
+        font-size: 80%;
+    }
+
+    .text_3 {
+        padding-top: 30px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .con_signup {
+        width: 40%;
+    }
+</style>
