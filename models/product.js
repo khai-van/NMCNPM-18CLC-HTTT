@@ -159,9 +159,36 @@ function create_detail_bill(id_bill,id_items,amount,price, callback) {
 }
 //return list of bill of user
 function get_bill(id_user,callback){
-
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("QuanLyCuaHang");
+        var query = { by_customer: id_user };
+        dbo.collection("Bills").find(query).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            //Khách hàng chưa có mua đơn hàng nào
+            if (result.length == 0) {
+                return callback(-1);
+            }
+            //Trả về danh sách bill của khách hàng
+            return callback(result); 
+        });
+    });
 }
-
+//return list of items of bill 
+function get_detail_bill(id_bill, callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("QuanLyCuaHang");
+        var query = { idbill: id_bill };
+        dbo.collection("Detail_Bills").find(query).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            //Trả về danh sách sản phẩm của hóa đơn đó
+            return callback(result);
+        });
+    });
+}
 module.exports = {
   findProduct,
   addProduct,
@@ -169,5 +196,7 @@ module.exports = {
   create_bill,
   get_bill,
   get_amount,
-  Purchase
+    Purchase,
+    create_detail_bill,
+    get_detail_bill
 };
