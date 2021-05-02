@@ -31,9 +31,7 @@ function register(name, date, email, pass, number, address, callback) {
     });
   });
 }
-var test = register("abc", "22-12-2020", "abc@gmail.com", "123", "090900", "xyz", function (result) {
-    console.log(result);
-})
+
 // check email
 function check_email(email, callback) {
     MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
@@ -44,9 +42,9 @@ function check_email(email, callback) {
             if (err) throw err;
             db.close();
             if (result.length == 0) {
-                return callback(1);
+                return callback(1); // email already to use
             }
-            return callback(0);
+            return callback(0); Email already exists
         });
     });
 }
