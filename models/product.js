@@ -12,7 +12,6 @@ function findProduct(query, callback) {
     });
   });
 }
-
 function addProduct(product, callback) {
   findProduct({ name: product.name }, (res) => {
     if (Object.keys(res).length !== 0) {
@@ -68,12 +67,25 @@ function adjustProduct(product, callback) {
 }
 
 //Chi Duy -- Purchase gio hang
-function Purchase(list_items,id_cus, callback) {
+function Purchase(list_items,id_cus,shipaddress, callback) {
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
       if (err) throw err;
+      var check = 0;
       var dbo = db.db("QuanLyCuaHang");
-      var total = 0;
       var random_bill = 'B' + Math.floor((Math.random() * 1000000) + 1);
+      // Kiểm tra id bill đã tồn tại chưa
+      do {
+          var query = { idbill: random_bill };
+          dbo.collection("Bills").find(query).toArray((err, result) => {
+              if (err) throw err;
+              db.close();
+              if (result.length == 0)
+                  check = 1;
+              else
+                  random_bill = 'B' + Math.floor((Math.random() * 1000000) + 1);
+          });
+      }while(check==0)
+      var total = 0;
       //Kiểm tra còn đủ số lượng sản phẩm để bán không?
       for (items in list_items) {
           get_amount(items.id, function (result) {
@@ -93,7 +105,11 @@ function Purchase(list_items,id_cus, callback) {
           });
           total += items.price;
       };
-      create_bill(random_bill,new Date(), total, id_cus, function (result) { });// nếu thành công trả về cái gì ???
+      create_bill(random_bill, new Date(), total, id_cus, shipaddress, function (result) { }); // Tạo bill với các thông tin chung
+      //Thêm các sản phẩm vào chi tiết của bill vừa tạo
+      for (items in list_items) {
+          create_detail_bill(random_bill, items.id, items.amount, items.price, function (result) { });
+      }
   });
 };
 //lay so luong hien co cua 1 san pham
@@ -112,20 +128,35 @@ function get_amount(id_item, callback) {
       });
   });
 }
-//Thêm hóa đơn
-function create_bill(billcode,date,total,id_cus, callback) {
+//Thêm hóa đơn - đặt hàng thì thêm bill tương ứng
+function create_bill(billcode,date,total,id_cus,shipaddress, callback) {
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
       if (err) throw err;
       var dbo = db.db("QuanLyCuaHang");
-      var myobj = { idbill: billcode, date_created: new Date(date), total: total, by_customer: id_cus, status: "Đang xử lý" };
+      var myobj = { idbill: billcode, date_created: new Date(date), total: total, by_customer: id_cus, delivery_address: shipaddress, status: "Đang xử lý" };
       dbo.collection("Bills").insertOne(myobj, function (err, res) {
           if (err) throw err;
           db.close();
-          return callback(1); // phải trả về hóa đơn để còn in ra chứ ??
+          return callback(1); //thêm thành công
       });
   });
 }
-
+//Thêm chi tiết hóa đơn - thêm 1 sản phẩm vào chi tiết hóa đơn
+function create_detail_bill(id_bill,id_items,amount,price, callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var query = { id: id_items }
+        var getname = findProduct(query, function (result) {
+            var dbo = db.db("QuanLyCuaHang");
+            var myobj = { idbill: id_bill, id_items: id_items, name_items: result[0].name, amount: amount, unit_price: price, total_price: amount * price };
+            dbo.collection("Detail_Bills").insertOne(myobj, function (err, res) {
+                if (err) throw err;
+                db.close();
+                return callback(1); //thêm thành công
+            });
+        });
+    });
+}
 //return list of bill of user
 function get_bill(id_user,callback){
 
