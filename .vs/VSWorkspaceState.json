@@ -1,12 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\html_css",
-    "\\html_css\\WEB_C3GumDa_Boot",
     "\\models",
     "\\public",
     "\\routes"
   ],
-  "SelectedNode": "\\models\\product.js",
   "PreviewInSolutionExplorer": false
 }

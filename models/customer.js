@@ -8,10 +8,10 @@ function register(name, date, email, pass, number, address, callback) {
     if (err) throw err;
     var random_id = "KH" + Math.floor(Math.random() * 1000000 + 1);
     var dbo = db.db("QuanLyCuaHang");
-    var check = login(email, pass, function (result) {
-      if (result != -1) {
+    var check = check_email(email, function (result) {
+      if (result == 0) {
         db.close();
-        return callback(-1); // register account fail - exist account
+        return callback(-1); // Email already exists
       } else {
         var myobj = {
           id: random_id,
@@ -31,7 +31,25 @@ function register(name, date, email, pass, number, address, callback) {
     });
   });
 }
-
+var test = register("abc", "22-12-2020", "abc@gmail.com", "123", "090900", "xyz", function (result) {
+    console.log(result);
+})
+// check email
+function check_email(email, callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("QuanLyCuaHang");
+        var query = { email: email };
+        dbo.collection("Customers").find(query).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            if (result.length == 0) {
+                return callback(1);
+            }
+            return callback(0);
+        });
+    });
+}
 //check login
 function login(username, pass, callback) {
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
