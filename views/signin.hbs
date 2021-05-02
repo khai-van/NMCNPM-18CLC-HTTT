@@ -1,56 +1,99 @@
-<section class="form-row">
-    {{#if notif}}
-    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{content}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                </div>
+{{#if notif}}
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{content}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#Modal').modal('show');
-        });
-    </script>
-    {{/if}}
-    <div class="container col-lg-5 px-5 pt-3">
-        <div class="row no-gutter">
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Modal').modal('show');
+    });
+</script>
+{{/if}}
 
-            <div class="col-lg-7 px-5 pt-5">
-                <h1 class="font-weight-bold py-3">Đăng Nhập</h1>
-                <form action="/signin" method="POST">
-                    <div class="form-floating mb-3">
-                        <input name="email" type="email" class="form-control " id="floatingInput"
-                            placeholder="name@example.com" required>
-                        <label for="floatingInput">Địa Chỉ Email</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input name="password" type="password" class="form-control" id="floatingPassword"
-                            placeholder="Password" required>
-                        <label for="floatingPassword">Mật Khẩu</label>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-lg-5">
-                            <button type="submit" class="btn1 mb-5">Login</button>
-                        </div>
-                    </div>
-                    <a href="#">Quên mật khẩu! </a>
-                    <p>Chưa có tài khoản? <a href="/signup">Đăng ký tại đây </a></p>
-
-                </form>
-            </div>
-        </div>
+<div class="container con_signin text_all ">
+    <div class="row text_3">
+        <h4>ĐĂNG NHẬP</h4>
+        <hr style="width:60%;text-align:left;margin-left:0">
     </div>
 
-</section>
+    <form action="/signin" method="POST">
+        <div class="fw-bold mb-3" style="color: gray;">
+            <label for="exampleInputEmail1" class="form-label">EMAIL</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                placeholder="Nhập địa chỉ Email" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3 fw-bold" style="color: gray;">
+            <label for="exampleInputPassword1" class="form-label">MẬT KHẨU</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                placeholder="Nhập mật khẩu" required>
+        </div>
+        <div class="fw-bold mb-3">
+            <a style="text-decoration: none" href="" class="qmk">Quên mật khẩu?</a>
+        </div>
+        <button type="submit" class="btn_dn fw-bold btn btn-primary">ĐĂNG NHẬP</button>
+        <div class="fw-bold mb-3 text_3">BAN CHƯA CÓ TÀI KHOẢN, ĐĂNG KÝ <a Style="text-decoration: none" href="/signup">TẠI
+                ĐÂY.</a></div>
+
+    </form>
+
+</div>
+
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    a.qmk {
+        color: rgb(79, 178, 195);
+    }
+
+    a.qmk:hover {
+        color: gray;
+    }
+
+    .btn_dn {
+        background-color: red;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+    }
+
+
+    .btn_dn:hover {
+        background-color: rgb(194, 79, 79);
+
+    }
+
+    .text_all {
+        font-size: 80%;
+    }
+
+    .text_3 {
+        padding-top: 30px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .con_signin {
+        width: 30%;
+    }
+</style>

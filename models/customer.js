@@ -44,7 +44,7 @@ function check_email(email, callback) {
             if (result.length == 0) {
                 return callback(1); // email already to use
             }
-            return callback(0); Email already exists
+            return callback(0); //Email already exists
         });
     });
 }

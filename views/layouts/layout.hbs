@@ -7,78 +7,103 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Documentation</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/Style.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/fonts/themify-icons/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/themify-icons/themify-icons.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <body>
   <div id="main">
+
+
     <div id="header" class="fixed-top ">
-      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid header_center position-relative">
-          <a class="navbar-brand" href="#"><img src="/images/logo.png" alt=""></a>
-          <h4 style="color:white; font-family:Verdana, Geneva, Tahoma, sans-serif">GẤU ĐEN</h4>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item me-5">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item me-5">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item me-5">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item dropdown me-5">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  Thể loại
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
+          <a class="navbar-brand" href="/"><img src="/images/img/Black_Bear1.png" alt=""></a>
+          <!-- <h4 style="color:white; font-family:Verdana, Geneva, Tahoma, sans-serif">GẤU ĐEN</h4> -->
+          <div class="icons row position-absolute top-50 end-0 translate-middle">
 
-              <div class="navbar-brand position-absolute top-50 end-0 translate-middle-y">
-                <ul class="navbar-nav">
-                  <li class="nav-item me-5">
-                    <a href="/signin">
-                      <i class="ti-user"></i>
-                    </a>
-                  </li>
-
-                  <li class="nav-item me-5">
-                    <i class="ti-shopping-cart"></i>
-                  </li>
-
-                  <li class="nav-item me-5">
-                    <i class="ti-search"></i>
-                  </li>
-                </ul>
-              </div>
-            </ul>
+            <div class="box_user col nav-item py-2  user_cart_search">
+              <button class="button-header navbar-light bg-dark"><i class="ti-user"></i></button>
 
 
+              <ul class="position-absolute table_login_sigin">
+                <li><a href="/signin">Đăng nhập</a></li>
+                <li><a href="/signup">Đăng kí</a></li>
+              </ul>
+
+            </div>
+
+
+            <div class="col nav-item py-2  user_cart_search">
+              <button class="button-header navbar-light bg-dark"><i class="ti-shopping-cart"></i></button>
+            </div>
+
+            <div class="col nav-item py-2  user_cart_search">
+              <button class="button-header navbar-light bg-dark" onclick="show_search_bar()"><i
+                  class="ti-search"></i></button>
+            </div>
+
+            <button class="col navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
           </div>
 
 
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item me-5">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item me-5">
+                <a class="nav-link" href="/category?newproduct=true">Sản phẩm mới</a>
+              </li>
+              <li class="nav-item me-5">
+                <a class="nav-link" href="/category?bestseller=true">Bán chạy</a>
+              </li>
+              <li class="nav-item dropdown me-5">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="true">
+                  Thể loại
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  {{#each productType}}
+                  <li><a class="dropdown-item" href="/category?type={{this}}">{{this}}</a></li>
+                  {{/each}}
+                </ul>
+              </li>
+            </ul>
+          </div>
 
 
         </div>
+
       </nav>
 
+      <!-- search-bar -->
+      <form id="search_bar" method="get" class="has-validation-callback">
+        <div class="input-group">
+          <input type="text" name="query" class="search-auto form-control" placeholder="Đấu Sĩ LBX?"
+            aria-label="Tìm kiếm">
+
+          <button class="navbar-light bg-dark" type="submit" aria-label="Tìm kiếm"
+            style="border: 0px; padding-right: 10px; padding-left: 10px;"><i class="ti-search"></i></button>
+
+        </div>
+      </form>
+
+
+
     </div>
-    <div class="body">
+
+    <div class="body" style="padding-top: 66px; min-height: 79vh">
       {{{body}}}
     </div>
+    
+
     <div id="footer">
       <footer class="bg-dark pt-5">
         <div class="container">
@@ -94,19 +119,6 @@
               </ul>
             </div>
             <div class="col-md-4 col-sm-6">
-              <ul class="widget-list">
-                <li class="widget-list-item" style="list-style-type: none;">
-                  <h5 class="widget-title text-light">QUI ĐỊNH & CHÍNH SÁCH</h5>
-                </li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Chính sách bảo mật</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Chính sách vận chuyển</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Chính sách đổi trả</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Chính sách thanh toán</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Chính sách bảo hành</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Chính sách đặt cọc</a></li>
-              </ul>
-            </div>
-            <div class="col-md-4">
               <div class="footer-index-sdt">
                 <ul class="index-sdt">
                   <li style="list-style-type: none">
@@ -118,15 +130,221 @@
 
               </div>
             </div>
+            <div class="col-md-4 text-center">
+              <img src="/images/img/logosalenoti.png" style="width: 250px;">
+
+            </div>
           </div>
         </div>
 
       </footer>
     </div>
   </div>
+
+  <style>
+    body {
+      background-color: #F0F2F5;
+    }
+
+    #header {
+      position: fixed;
+      z-index: 2;
+    }
+
+    #header img {
+      max-height: 50px;
+    }
+
+    #header .nav-link:hover {
+      background-color: red;
+    }
+
+    #header .navbar-brand {
+      margin: 0;
+      padding: 0;
+    }
+
+    #header a {
+      color: white;
+      line-height: 46px;
+      padding: 0px 24px;
+    }
+
+    #header .button-header {
+      border: 0;
+    }
+
+    #header .user_cart_search {
+      margin: 0;
+    }
+
+    #header .table_login_sigin li a {
+      list-style-type: none;
+      color: black;
+    }
+
+    #header .table_login_sigin li a:hover {
+      background-color: red;
+      display: block;
+      border-radius: 10px;
+
+    }
+
+    #header .table_login_sigin li {
+      list-style-type: none;
+    }
+
+    #header .table_login_sigin {
+      padding-left: 0px;
+      display: none;
+    }
+
+    #header .table_login_sigin {
+      border: 1px;
+      background-color: white;
+      border-radius: 10px;
+
+    }
+
+    #header li a {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+
+    #header .dropdown-menu li>a {
+      color: black;
+    }
+
+    #search_bar {
+      display: none;
+    }
+
+    #slider {
+      z-index: -1;
+    }
+
+    #slider button {
+      z-index: 0;
+    }
+
+    #slider .button123 {
+      z-index: 1;
+    }
+
+
+    #content .title-list-product a {
+      text-transform: uppercase;
+      color: black;
+
+    }
+
+    #content .title-list-product a:hover {
+      color: red;
+    }
+
+    #content .list-product a {
+      white-space: nowrap;
+    }
+
+    .list-product img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .list-product a {
+      text-decoration: none;
+      color: black;
+    }
+
+    #footer {
+      background-color: blue;
+    }
+
+    #footer .container li {
+      color: white;
+    }
+
+    #footer .container li a {
+      text-decoration: none;
+      color: white;
+    }
+
+    #header .ti-search {
+
+      color: white;
+
+    }
+
+    #header .ti-user {
+
+      color: white;
+    }
+
+
+    #header .ti-shopping-cart {
+
+      color: white;
+    }
+
+    @media (max-width:768px) {
+      .icons {
+        right: 0;
+        position: unset !important;
+        transform: translate(0%, 0%) !important;
+        padding-right: 5px;
+      }
+
+      .user_cart_search {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+  </style>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-    </script>
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('.box_user').mouseover(show_table_login_sigin);
+      $('.table_login_sigin').mouseover(show_table_login_sigin);
+      $('.box_user').mouseout(hide_table_login_sigin);
+
+      // $('.navbar-expand-lg').click(hide_search);
+      $('#content').click(hide_search);
+      $('#footer').click(hide_search);
+
+    });
+
+    function show_table_login_sigin() {
+      $('.table_login_sigin').show();
+    }
+
+    function hide_table_login_sigin() {
+      $('.table_login_sigin').hide();
+    }
+
+    function hide_search() {
+      $('#search_bar').hide();
+    }
+
+    var a;
+
+    function show_search_bar() {
+      if (a == 1) {
+
+        document.getElementById("search_bar").style.display = "inline";
+        return a = 0;
+      } else {
+
+        document.getElementById("search_bar").style.display = "none";
+        return a = 1;
+      }
+    }
+  </script>
+
+  
 </body>
 
 </html>
