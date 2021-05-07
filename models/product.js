@@ -189,6 +189,36 @@ function get_detail_bill(id_bill, callback) {
         });
     });
 }
+
+//add comment to items -- user can be email/name/...
+function add_comment(id_item,comment,user, callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("QuanLyCuaHang");
+        var myobj = {
+            id_item: id_item, comment: comment, by: user, date_created: new Date()};
+        dbo.collection("Comments").insertOne(myobj, function (err, res) {
+            if (err) throw err;
+            db.close();
+            return callback(1); //thêm thành công
+            });
+        });
+}
+// get all comment of item
+function get_comments(item,callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("QuanLyCuaHang");
+        var query = { id_item: item };
+        dbo.collection("Comments").find(query).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            //Trả về danh sách sản phẩm comment của sản phẩm đó
+            return callback(result);
+        });
+    });
+}
+
 module.exports = {
   findProduct,
   addProduct,
@@ -196,7 +226,9 @@ module.exports = {
   create_bill,
   get_bill,
   get_amount,
-    Purchase,
-    create_detail_bill,
-    get_detail_bill
+  Purchase,
+  create_detail_bill,
+  get_detail_bill,
+  add_comment,
+  get_comments
 };
