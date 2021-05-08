@@ -160,11 +160,11 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col col-7">
-                                        <input class="form-control" placeholder="Nhập mã giảm giá">
+                                        <input class="form-control" id="textsend" onkeyup="success()" placeholder="Nhập mã giảm giá">
                                     </div>
                                     <div class="col d-flex justify-content-end">
                                         <button type="submit"
-                                            class="btn_dn fw-bold btn btn-danger bi bi-arrow-return-left" disabled>
+                                            class="fw-bold btn btn-danger bi bi-arrow-return-left" id ="btn_dn" disabled>
                                             Áp dụng
                                         </button>
                                     </div>
@@ -303,7 +303,15 @@
             })
         })
         //]]></script>
-
+    <script>
+        function success() {
+            if (document.getElementById("textsend").value === "") {
+                document.getElementById('btn_dn').disabled = true;
+            } else {
+                document.getElementById('btn_dn').disabled = false;
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
