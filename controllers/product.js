@@ -124,7 +124,7 @@ exports.categoryProduct = function (req, res) {
 exports.productPage = function (req, res) {
   if (Object.keys(req.query).length !== 0) {
     var id_product = req.query.id;
-    var query = { id: id };
+    var query = { id: id_product };
     productModel.findProduct(query, (result) => {
       res.render("product", {
         productType: ["gundam", "toys", "game"],
@@ -132,4 +132,16 @@ exports.productPage = function (req, res) {
       });
     });
   }
+};
+
+exports.getcomment = function (req, res) {
+    if (Object.keys(req.query).length !== 0) {
+        var id_product = req.query.id;
+        productModel.get_comments(id_product, (result) => {
+            res.render("product", {
+                productType: ["gundam", "toys", "game"],
+                comments: result,
+            });
+        });
+    }
 };

@@ -1,9 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\controllers",
+    "\\html_css_js_LETIENDAT",
+    "\\html_css_js_LETIENDAT\\Home_page",
     "\\models",
-    "\\public",
-    "\\routes"
+    "\\routes",
+    "\\views"
   ],
+  "SelectedNode": "\\models\\product.js",
   "PreviewInSolutionExplorer": false
 }
