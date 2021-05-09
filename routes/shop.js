@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 var authentication_controller = require("../controllers/authentication");
 var product_controller = require("../controllers/product");
+var cart_controller = require("../controllers/cart")
 
 /* GET home page. */
 router.get("/", product_controller.HomePage);
@@ -18,5 +19,9 @@ router.post("/signup", authentication_controller.signUp);
 router.get("/category",product_controller.categoryProduct);
 
 router.get("/product", product_controller.productPage);
+
+router.get("/cart", cart_controller.addToCard);
+
+router.get("/popCart", cart_controller.popFromCard);
 
 module.exports = router;

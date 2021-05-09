@@ -6,26 +6,26 @@
     <div class="row">
       <div class="col-7">
         <div class="mt-2">
-          <label for="name" class="form-label"><strong>Tên sản phẩm</strong></label>
+          <label for="name" class="form-label text-truncate"><strong>Tên sản phẩm</strong></label>
           <input type="text" class="form-control" placeholder="Nhập tên" id="name" name="name" required>
         </div>
         <div class="row">
           <div class="col-6">
             <div class="mt-2">
-              <label for="price" class="form-label"><strong>Giá sản phẩm</strong></label>
+              <label for="price" class="text-truncate"><strong>Giá sản phẩm</strong></label>
               <input type="number" class="form-control" placeholder="Nhập giá (VNĐ/1sp)" id="price" name="price"
                 required>
             </div>
           </div>
           <div class="col-6">
             <div class="mt-2">
-              <label for="amount" class="form-label"><strong>Số lượng</strong></label>
+              <label for="amount" class="text-truncate"><strong>Số lượng</strong></label>
               <input type="number" class="form-control" placeholder="Nhập số lượng" id="amount" name="amount" required>
             </div>
           </div>
         </div>
         <div class="mt-2">
-          <label for="type" class="form-label"><strong>Loại</strong></label>
+          <label for="type" class="form-label text-truncate"><strong>Loại</strong></label>
           <select id="type" class="form-control" name="type" required>
             <option selected disabled value="">Chọn...</option>
             {{#each productType}}
@@ -36,7 +36,7 @@
       </div>
       <div class="col-5">
         <div class="mt-2" style="height: 100%">
-          <label for="descript" class="form-label"><STRONG>Mô tả</STRONG></label>
+          <label for="descript" class="form-label text-truncate"><STRONG>Mô tả</STRONG></label>
           <textarea class="form-control" placeholder="Ghi mô tả sản phẩm" id="descript" name="descript"
             style="height: 83.5%" required></textarea>
 
@@ -44,7 +44,7 @@
       </div>
     </div>
     <fieldset class="form-group mt-2">
-      <label for="upload" class="form-label"><strong>Hình sản phẩm</strong></label><br>
+      <label for="upload" class="form-label text-truncate"><strong>Hình sản phẩm</strong></label><br>
       <input type="file" class="form-control-file" id="upload" accept="image/x-png,image/gif,image/jpeg" name="upload"
         multiple>
 

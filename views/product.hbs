@@ -1,0 +1,238 @@
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {{#each product.files}}
+                    <div class="carousel-item">
+                        <img src="{{this}}" class="d-block w-100">
+                    </div>
+                    {{/each}}
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+                <div class="carousel-indicators">
+                    <div>
+                        {{#each product.files}}
+                        <button type="button" id="car{{@index}}" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide-to="{{@index}}" aria-current="true"
+                            aria-label="Slide {{math @index '+' 1}}"><img src="{{this}}" class="d-block w-100"></button>
+                        {{/each}}
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+        <div class="col-md-7">
+            <h2>{{product.name}}</h2>
+            <span>SKU: </span>
+            <span class="red_color">{{product.id}}</span>
+            <hr>
+            <h2 class="red_color gia">{{product.price}}</h2>
+            <span>Tình trạng: </span>
+            <span class="red_color">Còn hàng</span>
+            <hr>
+            <h5>Mô tả ngắn</h5>
+            <ul>
+                {{#each product.descript}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+            <label>Số lượng: </label>
+            <input type="number" value="1" style="width:60px">
+            <div class="d-grid button_cart">
+                <button type="button" class="add btn btn-danger button_cart">Thêm vào giỏ hàng</button>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- customer-reviews -->
+<div class="pt-9 pb-11">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Heading -->
+                <h4 class="mb-10 text-center">Bình Luận</h4>
+
+                <!--Reviews-->
+                <div class="mt-8">
+                    {{#each comments}}
+                    <!-- Review -->
+                    <div class="review border">
+                        <div class="review-body mx-4">
+                            <div class="row">
+                                <div class="col-12 col-md-auto">
+
+                                    <!-- Avatar -->
+                                    <div class="avatar avatar-xxl mb-6 mb-md-0">
+                                        <span class="avatar-title rounded-circle">
+                                            <i class="fa fa-user"></i>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-md">
+
+                                    <!-- Header -->
+                                    <div class="row mb-6">
+                                        <div class="col-12">
+
+                                            <!-- Time -->
+                                            <span class="font-size-xs text-muted">
+                                                {{this.by}}, <time
+                                                    datetime="{{this.date_created}}">{{this.date_created}}</time>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                    <!-- Text -->
+                                    <p class="text-gray-500">
+                                        {{this.comment}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    <div class="post-review mb-4">
+
+                        <!-- Body -->
+                        <div class="col">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="sr-only" for="reviewText">Review:</label>
+                                    <textarea class="form-control form-control-sm" id="reviewText" rows="5"
+                                        placeholder="Review *" required=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3 d-flex justify-content-end" style="padding-right: 12px;">
+                                <button type="button" class="btn btn-secondary " style="max-width: 200px">Đăng bình
+                                    luận</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<style>
+    #content {
+        margin-top: 100px;
+        margin-bottom: 50px;
+
+    }
+
+    .red_color {
+        color: red;
+
+    }
+
+    .gia {
+        font-size: 30px;
+    }
+
+    input {
+        border: 1px solid #ccc;
+        font-weight: bold;
+        height: 33px;
+        text-align: center;
+        width: 30px;
+    }
+
+    .button_cart {
+        /* background: #FE980F; */
+
+        color: #FFFFFF;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+
+    .icon {}
+
+    .carousel-indicators {
+        position: unset !important;
+    }
+
+    #content a {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+    }
+
+    #content .page_hientai {
+        color: red;
+        font-size: 20px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('.carousel-item').first().addClass('active');
+        $('#car0').attr('class', 'active');
+        $('.box_user').mouseover(show_table_login_sigin);
+        $('.table_login_sigin').mouseover(show_table_login_sigin);
+        $('.box_user').mouseout(hide_table_login_sigin);
+
+        // $('.navbar-expand-lg').click(hide_search);
+        $('#content').click(hide_search);
+        $('#footer').click(hide_search);
+
+    });
+
+    function show_table_login_sigin() {
+        $('.table_login_sigin').show();
+    }
+
+    function hide_table_login_sigin() {
+        $('.table_login_sigin').hide();
+    }
+
+    function hide_search() {
+        $('#search_bar').hide();
+    }
+
+
+
+    var a;
+
+    function show_search_bar() {
+        if (a == 1) {
+
+            document.getElementById("search_bar").style.display = "inline";
+            return a = 0;
+        } else {
+
+            document.getElementById("search_bar").style.display = "none";
+            return a = 1;
+        }
+    }
+</script>

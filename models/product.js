@@ -213,7 +213,7 @@ function get_comments(item,callback) {
         dbo.collection("Comments").find(query).toArray(function (err, result) {
             if (err) throw err;
             db.close();
-            //Trả về danh sách sản phẩm comment của sản phẩm đó
+            //Trả về danh sách comment của sản phẩm đó
             return callback(result);
         });
     });

@@ -28,15 +28,25 @@
 
 
               <ul class="position-absolute table_login_sigin">
+                {{#if userID}}
+                <li><a href="/user/info">Thông tin</a></li>
+                <li><a href="/user/logout">Đăng xuất</a></li>
+                {{else}}
                 <li><a href="/signin">Đăng nhập</a></li>
                 <li><a href="/signup">Đăng kí</a></li>
+                {{/if}}
+
               </ul>
 
             </div>
 
 
             <div class="col nav-item py-2  user_cart_search">
-              <button class="button-header navbar-light bg-dark"><i class="ti-shopping-cart"></i></button>
+              <button class="button-header navbar-light bg-dark">
+                <span class="p1 fa-stack fa-2x has-badge" data-count="{{amount}}">
+                <i class="ti-shopping-cart"></i>
+                </span>
+              </button>
             </div>
 
             <div class="col nav-item py-2  user_cart_search">
@@ -102,7 +112,7 @@
     <div class="body" style="padding-top: 66px; min-height: 79vh">
       {{{body}}}
     </div>
-    
+
 
     <div id="footer">
       <footer class="bg-dark pt-5">
@@ -287,6 +297,20 @@
       color: white;
     }
 
+    .p1[data-count]:after {
+      position: absolute;
+      top: 12%;
+      content: attr(data-count);
+      font-size: 10px;
+      padding: .2em;
+      border-radius: 50%;
+      line-height: 1em;
+      color: white;
+      background: rgba(255, 0, 0, .85);
+      text-align: center;
+      font-weight:bold;
+    }
+
     @media (max-width:768px) {
       .icons {
         right: 0;
@@ -294,6 +318,7 @@
         transform: translate(0%, 0%) !important;
         padding-right: 5px;
       }
+
 
       .user_cart_search {
         padding-left: 5px;
@@ -344,7 +369,7 @@
     }
   </script>
 
-  
+
 </body>
 
 </html>

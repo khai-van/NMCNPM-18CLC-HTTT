@@ -27,8 +27,19 @@ app.engine(
   hbs({
     defaultLayout: "layout",
     extname: ".hbs",
-  })
-);
+    helpers:{
+    // Function to do basic mathematical operation in handlebar
+    math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue);
+        rvalue = parseFloat(rvalue);
+        return {
+            "+": lvalue + rvalue,
+            "-": lvalue - rvalue,
+            "*": lvalue * rvalue,
+            "/": lvalue / rvalue,
+            "%": lvalue % rvalue
+        }[operator];
+    }
+}}));
 app.set("view engine", ".hbs");
 
 app.use(logger("dev"));
