@@ -195,8 +195,9 @@ function add_comment(id_item,comment,user, callback) {
     MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
         if (err) throw err;
         var dbo = db.db("QuanLyCuaHang");
+        var n = new Date();
         var myobj = {
-            id_item: id_item, comment: comment, by: user, date_created: new Date()};
+            id_item: id_item, comment: comment, by: user, date_created: n.toDateString() + " " + n.toLocaleTimeString()};
         dbo.collection("Comments").insertOne(myobj, function (err, res) {
             if (err) throw err;
             db.close();
