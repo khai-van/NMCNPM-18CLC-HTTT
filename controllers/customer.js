@@ -62,22 +62,12 @@ exports.getHistory = function (req, res) {
 
 exports.addcomment = function (req, res) {
   if (req.session.User && req.session.User != "admin") {
-    var id_user = req.sesion.User;
-    if (Object.keys(req.query).length !== 0) {
-      var cmt = req.body;
-      var id_product = req.query.id;
-      productModel.add_comment(id_product, cmt, id_user, (result) => {
-        if (result) {
-          res.status(200).send({
-            state: ["success", result],
-          });
-        } else {
-          res.status(200).send({
-            state: ["fail"],
-          });
-        }
+    var id_user = req.session.User;
+    productModel.add_comment(req.body.id, req.body.review, id_user, (result) => {
+      res.status(200).send({
+        state: result,
       });
-    }
+    });
   } else {
     res.redirect("/signin");
   }

@@ -53,9 +53,9 @@
                 {{/each}}
             </ul>
             <label>Số lượng: </label>
-            <input type="number" value="1" style="width:60px">
+            <input id="amount" type="number" value="1" style="width:60px">
             <div class="d-grid button_cart">
-                <button type="button" class="add btn btn-danger button_cart">Thêm vào giỏ hàng</button>
+                <button type="button" class="add btn btn-danger button_cart" onclick="addToCart('{{product.id}}')">Thêm vào giỏ hàng</button>
             </div>
 
 
@@ -86,7 +86,7 @@
                                     <!-- Avatar -->
                                     <div class="avatar avatar-xxl mb-6 mb-md-0">
                                         <span class="avatar-title rounded-circle">
-                                            <i class="fa fa-user"></i>
+                                            <i class="ti-user"></i>
                                         </span>
                                     </div>
 
@@ -122,14 +122,15 @@
                             <div class="row">
                                 <div class="form-group">
                                     <label class="sr-only" for="reviewText">Review:</label>
-                                    <textarea class="form-control form-control-sm" id="reviewText" rows="5"
-                                        placeholder="Review *" required=""></textarea>
+                                    <textarea class="form-control form-control-sm" name="review" id="reviewText"
+                                        rows="5" placeholder="Review" required
+                                        {{#unless userID}}disabled{{/unless}}></textarea>
                                 </div>
                             </div>
 
-                            <div class="row mt-3 d-flex justify-content-end" style="padding-right: 12px;">
-                                <button type="button" class="btn btn-secondary " style="max-width: 200px">Đăng bình
-                                    luận</button>
+                            <div class="row mt-3 d-flex justify-content-end" style="padding-right: 12px">
+                                <button type="button" class="btn btn-secondary" style="max-width: 200px"
+                                    onclick="addcomment()" {{#unless userID}}disabled{{/unless}}>Đăng bình luận</button>
                             </div>
                         </div>
 
@@ -205,8 +206,46 @@
         // $('.navbar-expand-lg').click(hide_search);
         $('#content').click(hide_search);
         $('#footer').click(hide_search);
-
     });
+
+    function addcomment() {
+        var fd = new FormData();
+        var comments = $("#reviewText").val();
+        fd.append("review", comments);
+        fd.append("id", "{{product.id}}");
+        console.log(fd);
+        $.ajax({
+            url: "/comment",
+            type: "POST",
+            data: fd,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                location.reload();
+            }
+        });
+    }
+    function addToCart(id){
+            amount = $("#amount").val();
+            $.ajax({
+                url: "/cart",
+                type: "GET",
+                data: {
+                    id: id,
+                    amount: amount
+                },
+                dataType: "json",
+
+                success: async function (data) {
+                    if (data.state != "fail") {
+                        $(".p1").attr("data-count", data.state);
+                    }
+                }
+            });
+	}
+
+
 
     function show_table_login_sigin() {
         $('.table_login_sigin').show();

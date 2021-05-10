@@ -108,7 +108,6 @@ exports.adjustProduct = function (req, res) {
 exports.HomePage = function (req, res) {
   req.session.previous = "/";
   productModel.findProduct({}, (result) => {
-    console.log(result);
     res.render("index", {
       userID: req.session.User,
       productType: ["gundam", "toys", "game"],
