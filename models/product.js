@@ -98,6 +98,7 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
                         ID_bill = "B" + i;
                         if (!listID.includes(ID_bill)) break;
                     }
+                    let total = 0;
                     //Cập nhật lại số lượng sản phẩm còn lại và tính tổng tiền
                     var list_id = Object.keys(list_items);
                     var query = {           // tạo query tìm tất các sản phẩm có id trong list_item
@@ -106,16 +107,10 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
                         }
                     }
                     findProduct(query, (result) => {
-                        var total = 0;
                         var products = result; // list sản phẩm có id trong cart
                         for (item in products) {
-                            let temp = list_items[products[item].id];
-                            let price_item = products[item].price.replace(' ₫', '');
-                            //price_item = products[item].price.replace(/./g, '');
-                            console.log(price_item);
                             list_items[products[item].id] = products[item].amount - list_items[products[item].id];
-                            total += (products[item].price * temp);
-                            console.log(products[item].price * temp);
+                            total += (products[item].price*products[item].amount);
                         }
                         for (item in list_items) {
                             var myquery = { id: item };
@@ -125,7 +120,6 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
                                 db.close();
                             });
                         }
-                        console.log(total);
                     })
                     /*
                     for (items in list_items) {
@@ -155,7 +149,7 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
         });
     })
 };
-//Purchase({ "SP1": 2, "SP2": 3 }, "abc", "xyz", function (result) { console.log(result) });
+Purchase({ "SP1": 2, "SP2": 3 }, "abc", "xyz", function (result) { console.log(result) });
 function checkCart(cart, callback){ // Cart chuyền vào là một object có dạng { id_sanpham: so luong, ... } không phải list object [ {id:.., amount..},...] 
   var list_items = Object.keys(cart);
   var query = {           // tạo query tìm tất các sản phẩm có id trong list_item
@@ -171,6 +165,9 @@ function checkCart(cart, callback){ // Cart chuyền vào là một object có d
     return callback(0);
   });
 }
+
+
+
 
 //lay so luong hien co cua 1 san pham
 function get_amount(id_item, callback) {
