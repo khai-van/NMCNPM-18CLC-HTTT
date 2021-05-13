@@ -74,7 +74,6 @@ exports.purchasePage = function (req, res) {
     if (req.session.User && req.session.User != "admin") {
         if (req.session.Cart !== undefined && Object.keys(req.session.Cart).length !== 0) {
             var cart = req.session.Cart;
-            
             product_Model.checkCart(cart, (result) => {
                 console.log(result);
                 if (result == 0) {

@@ -114,7 +114,7 @@ function Purchase(list_items,id_cus,shipaddress, callback) {
 };
 
 function checkCart(cart, callback){ // Cart chuyền vào là một object có dạng { id_sanpham: so luong, ... } không phải list object [ {id:.., amount..},...] 
-  var list_items = cart.keys(); 
+  var list_items = Object.keys(cart);
   var query = {           // tạo query tìm tất các sản phẩm có id trong list_item
     id: {
         $in: list_items
@@ -123,7 +123,7 @@ function checkCart(cart, callback){ // Cart chuyền vào là một object có d
   findProduct(query, (result) => {
     var products = result; // list sản phẩm có id trong cart
     for (item in products){
-      if(item.amount < list_items[item.id]) return callback(item.id);
+      if(products[item].amount < cart[products[item].id]) return callback(item.id);
     }
     return callback(0);
   });
