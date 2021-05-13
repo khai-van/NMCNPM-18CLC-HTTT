@@ -123,7 +123,7 @@ function checkCart(cart, callback){ // Cart chuyền vào là một object có d
   findProduct(query, (result) => {
     var products = result; // list sản phẩm có id trong cart
     for (item in products){
-      if(products[item].amount < cart[products[item].id]) return callback(item.id);
+      if(products[item].amount < cart[products[item].id]) return callback(products[item].id);
     }
     return callback(0);
   });
