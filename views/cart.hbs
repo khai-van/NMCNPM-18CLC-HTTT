@@ -1,26 +1,26 @@
 {{#if listCart}}
-<dir class="container body">
-    <div class="card">
-        <div class="row">
-            <div class="col-md-8 cart">
-                <div class="title">
+<dir class="container body" style="padding-top:20px; padding-bottom:20px">
+    <div class="card card1">
+        <div class="row row1">
+            <div class="col-md-8 cart1">
+                <div class="title1">
                     <div class="row">
                         <div class="col">
                             <h4><b>Shopping Cart</b></h4>
                         </div>
-                        <div class="col align-self-center text-end text-muted">{{listCart.length}} items</div>
+                        <div class="col col1 align-self-center text-end text-muted">{{listCart.length}} items</div>
                     </div>
                 </div>
                 {{#each listCart}}
                 <div class="row border-top border-bottom">
                     <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid img" src="{{this.files.[0]}}"></div>
-                        <div class="col">
+                        <div class="col-2 col1"><img class="img-fluid img" src="{{this.files.[0]}}"></div>
+                        <div class="col-4 col1">
                             <div class="row text-muted">{{this.type}}</div>
                             <div class="row">{{this.name}}</div>
                         </div>
-                        <div class="col align-items-center amount"> {{this.number}} </div>
-                        <div class="col"><span class="price">{{this.price}}</span><a class="a"
+                        <div class="col-1 align-items-center amount" style="padding:0px"> {{this.number}} </div>
+                        <div class="col col1"><span class="price">{{this.price}}</span><a class="a"
                                 style="float:right; text-decoration: none;" onclick="popCart('{{this.id}}')">X</a></div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="back-to-shop text-muted"><a href="/" style="text-decoration: none;">&leftarrow; Quay lại</a>
                 </div>
             </div>
-            <div class="col-md-4 summary">
+            <div class="col-md-4 summary1">
                 <div>
                     <h5 style="margin-top: 4vh"><b>Summary</b></h5>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">Tổng cộng</div>
                     <div class="col text-right" id="total">100.000Vnd</div>
-                </div> <a class="btn" href="/purchase">Thanh toán</a>
+                </div> <a class="btn btn1" href="/purchase">Thanh toán</a>
             </div>
         </div>
     </div>
@@ -70,10 +70,10 @@
                 <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Sản phẩm {{err}} không còn đủ số lượng hoặc không khả dụng.
+            <div class="modal-body" style="font-weight: normal;">
+                Sản phẩm "{{err}}" không còn đủ số lượng hoặc không khả dụng.
                 <br>
-                Xin vui lòng xóa sản phẩm để tiếp tục thanh toán.
+                Xin vui lòng xóa sản phẩm để tiếp tục thanh toán!
                 <br>
             </div>
             <div class="modal-footer">
@@ -90,7 +90,7 @@
 {{/if}}
 
 <style>
-    .body {
+    .body1 {
         background: #ddd;
         vertical-align: middle;
         display: flex;
@@ -99,11 +99,11 @@
         font-weight: bold
     }
 
-    .title {
+    .title1 {
         margin-bottom: 5vh
     }
 
-    .card {
+    .card1 {
         margin: auto;
         max-width: 950px;
         width: 90%;
@@ -113,12 +113,12 @@
     }
 
     @media(max-width:767px) {
-        .card {
+        .card1 {
             margin: 3vh auto
         }
     }
 
-    .cart {
+    .cart1 {
         background-color: #fff;
         padding: 4vh 5vh;
         border-bottom-left-radius: 1rem;
@@ -126,14 +126,14 @@
     }
 
     @media(max-width:767px) {
-        .cart {
+        .cart1 {
             padding: 4vh;
             border-bottom-left-radius: unset;
             border-top-right-radius: 1rem
         }
     }
 
-    .summary {
+    .summary1 {
         background-color: #ddd;
         border-top-right-radius: 1rem;
         border-bottom-right-radius: 1rem;
@@ -142,36 +142,35 @@
     }
 
     @media(max-width:767px) {
-        .summary {
+        .summary1 {
             border-top-right-radius: unset;
             border-bottom-left-radius: 1rem
         }
     }
 
-    .summary .col-2 {
+    .summary1 .col-2 {
         padding: 0
     }
 
-    .summary .col-10 {
+    .summary1 .col-10 {
         padding: 0
     }
 
-    .row {
+    .row1 {
         margin: 0
     }
 
-    .title b {
+    .title1 b {
         font-size: 1.5rem
     }
 
-    .main {
+    .main1 {
         margin: 0;
         padding: 2vh 0;
         width: 100%
     }
 
-    .col-2,
-    .col {
+    .col1 {
         padding: 0 1vh
     }
 
@@ -222,7 +221,7 @@
         color: transparent
     }
 
-    .btn {
+    .btn1 {
         background-color: #000;
         border-color: #000;
         color: white;
@@ -233,7 +232,7 @@
         border-radius: 0
     }
 
-    .btn:focus {
+    .btn1:focus {
         box-shadow: none;
         outline: none;
         box-shadow: none;
@@ -243,7 +242,7 @@
         transition: none
     }
 
-    .btn:hover {
+    .btn1:hover {
         color: white
     }
 
