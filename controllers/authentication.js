@@ -1,7 +1,7 @@
 var customerModel = require("../models/customer");
 
 const sumProduct = (obj) => {
-  if (obj === undefined || obj === {}) return 0;
+  if (obj === undefined || Object.keys(obj).length == 0) return 0;
   return Object.values(obj).reduce((a, b) => a + b);
 }
 

@@ -88,10 +88,10 @@ function Purchase(list_items,id_cus,shipaddress, callback) {
       var total = 0;
       //Kiểm tra còn đủ số lượng sản phẩm để bán không?
       for (items in list_items) {
-          get_amount(items.id, function (result) {
-              if (result < items.amount)
-                  return callback(items); // trả về sản phẩm hết hàng
-          });
+        get_amount(items.id, function (result) {
+            if (result < items.amount)
+                return callback(items); // trả về sản phẩm hết hàng
+        });
       }
       //Cập nhật lại số lượng sản phẩm còn lại và tính tổng tiền
       for (items in list_items) {
@@ -112,6 +112,26 @@ function Purchase(list_items,id_cus,shipaddress, callback) {
       }
   });
 };
+
+function checkCart(cart, callback){ // Cart chuyền vào là một object có dạng { id_sanpham: so luong, ... } không phải list object [ {id:.., amount..},...] 
+  var list_items = cart.keys(); 
+  var query = {           // tạo query tìm tất các sản phẩm có id trong list_item
+    id: {
+        $in: list_items
+    }
+  }
+  findProduct(query, (result) => {
+    var products = result; // list sản phẩm có id trong cart
+    for (item in products){
+      if(item.amount < list_items[item.id]) return callback(item.id);
+    }
+    return callback(0);
+  });
+}
+
+
+
+
 //lay so luong hien co cua 1 san pham
 function get_amount(id_item, callback) {
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
@@ -228,6 +248,7 @@ module.exports = {
   get_bill,
   get_amount,
   Purchase,
+  checkCart,
   create_detail_bill,
   get_detail_bill,
   add_comment,

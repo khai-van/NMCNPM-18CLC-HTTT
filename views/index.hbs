@@ -60,7 +60,7 @@
 						</div>
 					</div>
 					<div class="card-body card-body-hidden">
-						<button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button" onclick="addToCart('{{this.id}}', 1)"><i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+						<button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button" onclick="addToCart('{{this.id}}', 1, '{{this.price}}')"><i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
 					</div>
 				</div>
 				<hr class="d-sm-none">
@@ -72,13 +72,14 @@
 	</div>
 
 	<script>
-		function addToCart(id, amount){
+		function addToCart(id, amount, price){
             $.ajax({
                 url: "/cart",
                 type: "GET",
                 data: {
                     id: id,
-                    amount: amount
+                    amount: amount,
+					price: price
                 },
                 dataType: "json",
 

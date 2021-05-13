@@ -25,9 +25,13 @@ router.get("/category",product_controller.categoryProduct);
 
 router.get("/product", product_controller.productPage);
 
-router.get("/cart", cart_controller.addToCard);
+router.get("/cart", cart_controller.addToCart);
 
-router.get("/popCart", cart_controller.popFromCard);
+router.get("/popCart", cart_controller.popFromCart);
+
+router.get("/cartp", cart_controller.cartPage);
+
+router.get("/purchase", cart_controller.purchasePage);
 
 router.post("/comment",upload.array('upload', 1), customer_controller.addcomment);
 
