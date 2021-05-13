@@ -39,7 +39,6 @@ exports.popFromCart = function (req, res) {
 };
 
 exports.cartPage = function (req, res) {
-    console.log(req.session);
     if (req.session.Cart !== undefined) {
         var cart = req.session.Cart;
         var listID = Object.keys(cart);
@@ -70,7 +69,6 @@ exports.cartPage = function (req, res) {
 }
 
 exports.purchasePage = function (req, res) {
-    console.log("123", req.session);
     if (req.session.User && req.session.User != "admin") {
         if (req.session.Cart !== undefined && Object.keys(req.session.Cart).length !== 0) {
             var cart = req.session.Cart;
@@ -107,6 +105,30 @@ exports.purchasePage = function (req, res) {
                     }
                 });
 
+            });
+        } else {
+            res.redirect("/cartp");
+        }
+    } else {
+        res.redirect("/signin");
+    }
+}
+
+exports.purchase = function (req, res) {
+    if (req.session.User && req.session.User != "admin") {
+        if (req.session.Cart !== undefined && Object.keys(req.session.Cart).length !== 0) {
+            console.log(req.session.Cart);
+            product_Model.Purchase1(req.session.Cart, (result) => {
+                if (result == 0) {
+                    req.session.Cart = {};
+                    res.status(200).send({
+                        state: "success",
+                    });
+                } else {
+                    res.status(200).send({
+                        state: "fail",
+                    });
+                }
             });
         } else {
             res.redirect("/cartp");

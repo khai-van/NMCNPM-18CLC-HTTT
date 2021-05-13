@@ -33,6 +33,8 @@ router.get("/cartp", cart_controller.cartPage);
 
 router.get("/purchase", cart_controller.purchasePage);
 
+router.post("/purchase", cart_controller.purchase);
+
 router.post("/comment",upload.array('upload', 1), customer_controller.addcomment);
 
 router.get("/productNewPage", product_controller.productNewPage);

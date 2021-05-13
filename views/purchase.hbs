@@ -78,7 +78,7 @@
                                     <p>Tạm tính</p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <p>5.800.000đ</p>
+                                    <p id="total1">5.800.000đ</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -101,7 +101,7 @@
                         <div class="col"></div>
                         <div class="col"></div>
                         <div class="col d-flex justify-content-end">
-                            <h6 style="color: red;">5.800.000đ</h6>
+                            <h6 style="color: red;" id="total"></h6>
                         </div>
 
                     </div>
@@ -110,16 +110,37 @@
                             <p class="bi bi-caret-left-fill" style="color: red;"></p>
                         </div>
                         <div class="col">
-                            <a href="" style="text-decoration: none;color: red;">Quay về giỏ hàng</a>
+                            <a href="/cartp" style="text-decoration: none;color: red;">Quay về giỏ hàng</a>
                         </div>
 
                         <div class="col d-flex justify-content-end">
-                            <button type="submit" class="btn_dn fw-bold btn btn-danger">
+                            <button type="button" class="btn_dn fw-bold btn btn-danger" id="purchase">
                                 Đặt hàng
                             </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" id="notif">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closed" class="btn btn-secondary" data-dismiss="modal" disabled>
+                    <span id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    <span id="button-closed">
+                    </span>
+                </button>
             </div>
         </div>
     </div>
@@ -131,3 +152,55 @@
         color: rgb(100, 88, 88);
     }
 </style>
+
+<script>
+    $(document).ready(() => {
+        var prices = document.getElementsByClassName("price");
+        var amounts = document.getElementsByClassName("amount");
+        var sum = 0;
+        for (var i = 0; i < prices.length; i++) {
+            var priceFloat = parseFloat(prices[i].innerHTML.replace(/[^0-9]/g, ''));
+            sum += priceFloat * parseInt(amounts[i].innerHTML);
+        }
+        sum = sum.toLocaleString('it-IT', {
+            style: 'currency',
+            currency: 'VND'
+        });
+        $("#total").html(sum);
+        $("#total1").html(sum);
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        $("#purchase").click(function (e) {
+            $("#Modal").modal("show");
+            $("#spinner").show();
+            $("#closed").prop("disabled", true);
+            $("#notif").text("Loading...");
+            $("#button-closed").text("Loading...");
+
+
+            $.ajax({
+                url: "/purchase",
+                type: "POST",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: async function (data) {
+                    $("#spinner").hide();
+                    $("#closed").prop("disabled", false);
+                    $("#button-closed").text("Đóng");
+                    if (data.state == "success") {
+                        $("#notif").text("Đã đặt hàng thành công thành công");
+                        sleep(2000);
+                        window.location.replace("/");
+                    } else {
+                        $("#notif").text("Đặt hàng không thành công");
+                        sleep(2000);
+                        window.location.replace("/cartp");
+                    }
+                }
+            });
+        });
+    });
+</script>

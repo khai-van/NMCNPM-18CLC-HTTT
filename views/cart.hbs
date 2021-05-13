@@ -5,7 +5,7 @@
             <div class="col-md-8 cart1">
                 <div class="title1">
                     <div class="row">
-                        <div class="col">
+                        <div class="col text-center">
                             <h4><b>Shopping Cart</b></h4>
                         </div>
                         <div class="col col1 align-self-center text-end text-muted">{{listCart.length}} items</div>
@@ -13,7 +13,7 @@
                 </div>
                 {{#each listCart}}
                 <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
+                    <div class="row main align-items-center py-3">
                         <div class="col-2 col1"><img class="img-fluid img" src="{{this.files.[0]}}"></div>
                         <div class="col-4 col1">
                             <div class="row text-muted">{{this.type}}</div>
@@ -294,7 +294,6 @@
             style: 'currency',
             currency: 'VND'
         });
-        console.log(sum)
         $("#total").html(sum);
     });
 </script>
