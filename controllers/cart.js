@@ -70,40 +70,43 @@ exports.cartPage = function (req, res) {
 }
 
 exports.purchasePage = function (req, res) {
-    console.log("123",req.session);
+    console.log("123", req.session);
     if (req.session.User && req.session.User != "admin") {
         if (req.session.Cart !== undefined && Object.keys(req.session.Cart).length !== 0) {
             var cart = req.session.Cart;
             product_Model.checkCart(cart, (result) => {
-                console.log(result);
-                if (result == 0) {
-                    console.log("wrong");
-                } else {
-                    console.log(result);
-                    var err;
-                    var cart = req.session.Cart;
-                    var listID = Object.keys(cart);
-                    var query = {
-                        id: {
-                            $in: listID
-                        }
+                var cart = req.session.Cart;
+                var listID = Object.keys(cart);
+                var query = {
+                    id: {
+                        $in: listID
                     }
-                    product_Model.findProduct(query, (items) => {
-                        var ret = items;
-                        for (var i = 0; i < ret.length; i++) {
-                            ret[i].number = cart[ret[i].id];
-                            if(ret[i].id == result) err = ret[i].name;
-                        }
-                        console.log(err);
+                }
+                product_Model.findProduct(query, (items) => {
+                    var ret = items;
+                    var err;
+                    for (var i = 0; i < ret.length; i++) {
+                        ret[i].number = cart[ret[i].id];
+                        if (result !== 0 && ret[i].id == result) err = ret[i].name;
+                    }
+                    if (result == 0) {
+                        res.render("purchase", {
+                            userID: req.session.User,
+                            productType: ["gundam", "toys", "game"],
+                            listCart: ret,
+                            amount: sumProduct(req.session.Cart)
+                        });
+                    } else {
                         res.render("cart", {
                             userID: req.session.User,
                             productType: ["gundam", "toys", "game"],
                             listCart: ret,
-                            err: err, 
+                            err: err,
                             amount: sumProduct(req.session.Cart)
                         });
-                    });
-                }
+                    }
+                });
+
             });
         } else {
             res.redirect("/cartp");
