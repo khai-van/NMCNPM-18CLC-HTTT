@@ -35,4 +35,5 @@ router.get("/purchase", cart_controller.purchasePage);
 
 router.post("/comment",upload.array('upload', 1), customer_controller.addcomment);
 
+router.get("/productNewPage", product_controller.productNewPage);
 module.exports = router;
