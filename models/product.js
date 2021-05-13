@@ -12,6 +12,18 @@ function findProduct(query, callback) {
     });
   });
 }
+//get information from Bills
+function findBills(query, callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
+        if (err) throw err;
+        var dbo = db.db("QuanLyCuaHang");
+        dbo.collection("Bills").find(query).toArray((err, result) => {
+            if (err) throw err;
+            db.close();
+            return callback(result);
+        });
+    });
+}
 function addProduct(product, callback) {
   findProduct({ name: product.name }, (res) => {
     if (Object.keys(res).length !== 0) {
@@ -67,50 +79,56 @@ function adjustProduct(product, callback) {
 }
 
 //Chi Duy -- Purchase gio hang
-function Purchase(list_items,id_cus,shipaddress, callback) {
-  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
-      if (err) throw err;
-      var check = 0;
-      var dbo = db.db("QuanLyCuaHang");
-      var random_bill = 'B' + Math.floor((Math.random() * 1000000) + 1);
-      // Kiểm tra id bill đã tồn tại chưa
-      do {
-          var query = { idbill: random_bill };
-          dbo.collection("Bills").find(query).toArray((err, result) => {
-              if (err) throw err;
-              db.close();
-              if (result.length == 0)
-                  check = 1;
-              else
-                  random_bill = 'B' + Math.floor((Math.random() * 1000000) + 1);
-          });
-      }while(check==0)
-      var total = 0;
-      //Kiểm tra còn đủ số lượng sản phẩm để bán không?
-      for (items in list_items) {
-        get_amount(items.id, function (result) {
-            if (result < items.amount)
-                return callback(items); // trả về sản phẩm hết hàng
+function Purchase(list_items, id_cus, shipaddress, callback) {
+    MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+        if (err) throw err;
+        var check = 0;
+        var dbo = db.db("QuanLyCuaHang");
+        //Kiểm tra còn đủ số lượng sản phẩm để bán không?
+        checkCart(list_items, function (result) {
+            if (result == 0) {
+                // Kiểm tra id bill đã tồn tại chưa
+                findBills({}, (result) => {
+                    //get list of IDbill
+                    var listID = result.map(function (obj) {
+                        return obj.idbill;
+                    });
+                    var ID_bill;
+                    for (var i = 1; i; i++) {
+                        ID_bill = "B" + i;
+                        if (!listID.includes(ID_bill)) break;
+                    }
+                    let total = 0;
+                    //Cập nhật lại số lượng sản phẩm còn lại và tính tổng tiền
+                    for (items in list_items) {
+                        let id = items;
+                        get_amount(id, function (result) {
+                            var myquery = { id: id };
+                            var newvalues = { $set: { amount: result - list_items[id] } };
+                            dbo.collection("Products").updateOne(myquery, newvalues, function (err, res) {
+                                if (err) throw err;
+                                db.close();
+                            });
+                        });
+                        var query = { id: id }
+                        findProduct(query, function (result) {
+                            total += result[0].price;
+                            create_detail_bill(ID_bill, id, list_items[id], result[0].price, function (result) { });
+                        });
+                    };
+                    create_bill(ID_bill, new Date(), total, id_cus, shipaddress, function (result) { }); // Tạo bill với các thông tin chung
+                    //Thêm các sản phẩm vào chi tiết của bill vừa tạo
+                    /*for (items in list_items) {
+                        create_detail_bill(ID_bill, items, list_items[items], 1000000, function (result) { });
+                    }*/
+                });
+            }
+            else {
+                db.close();
+                return callback(result);
+            }
         });
-      }
-      //Cập nhật lại số lượng sản phẩm còn lại và tính tổng tiền
-      for (items in list_items) {
-          get_amount(items.id, function (result) {
-              var myquery = { id: items.id };
-              var newvalues = { $set: { amount: result - items.amount } };
-              dbo.collection("Products").updateOne(myquery, newvalues, function (err, res) {
-                  if (err) throw err;
-                  db.close();
-              });
-          });
-          total += items.price;
-      };
-      create_bill(random_bill, new Date(), total, id_cus, shipaddress, function (result) { }); // Tạo bill với các thông tin chung
-      //Thêm các sản phẩm vào chi tiết của bill vừa tạo
-      for (items in list_items) {
-          create_detail_bill(random_bill, items.id, items.amount, items.price, function (result) { });
-      }
-  });
+    })
 };
 
 function checkCart(cart, callback){ // Cart chuyền vào là một object có dạng { id_sanpham: so luong, ... } không phải list object [ {id:.., amount..},...] 
