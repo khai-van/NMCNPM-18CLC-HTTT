@@ -185,3 +185,105 @@ exports.getcomment = function (req, res) {
     });
   }
 };
+
+
+exports.productNewPage = function (req, res) {
+  req.session.previous = "/productNewPage";
+  if(req.query.hasOwnProperty('_sort_AZ')) {
+    productModel.findProduct({}, (result) => {
+      var a = result;
+      for(var i = 0; i < a.length; i++){
+        var last = a[i];
+        var j = i;
+        while(j > 0 && a[j - 1].name > last.name){
+            a[j] = a[j -1];
+            j = j - 1;
+        }
+        a[j] = last;
+      }
+      
+      res.render("productNewPage", {
+        userID: req.session.User,
+        productType: ["gundam", "toys", "game"],
+        listProducts: a,
+        amount: sumProduct(req.session.Cart)
+      });
+    });
+  }
+  else if(req.query.hasOwnProperty('_sort_ZA')) {
+    productModel.findProduct({}, (result) => {
+      var a = result;
+      for(var i = 0; i < a.length; i++){
+        var last = a[i];
+        var j = i;
+        while(j > 0 && a[j - 1].name < last.name){
+            a[j] = a[j -1];
+            j = j - 1;
+        }
+        a[j] = last;
+      }
+      
+      res.render("productNewPage", {
+        userID: req.session.User,
+        productType: ["gundam", "toys", "game"],
+        listProducts: a,
+        amount: sumProduct(req.session.Cart)
+      });
+    });
+  }
+  else if(req.query.hasOwnProperty('_sort_tang')) {
+    productModel.findProduct({}, (result) => {
+      var a = result;
+      for(var i = 0; i < a.length; i++){
+        var last = a[i];
+        var j = i;
+        while(j > 0 && parseInt(a[j - 1].price.substring(0,a[j - 1].price.length-1)) > parseInt(last.price.substring(0,last.price.length-1))){
+            a[j] = a[j -1];
+            j = j - 1;
+        }
+        a[j] = last;
+      }
+      
+      res.render("productNewPage", {
+        userID: req.session.User,
+        productType: ["gundam", "toys", "game"],
+        listProducts: a,
+        amount: sumProduct(req.session.Cart)
+      });
+    });
+  }
+  else if(req.query.hasOwnProperty('_sort_giam')) {
+    productModel.findProduct({}, (result) => {
+      var a = result;
+      for(var i = 0; i < a.length; i++){
+        var last = a[i];
+        var j = i;
+        console.log(parseInt(last.price.substring(0,last.price.length -1)))
+        while(j > 0 && parseInt(a[j - 1].price.substring(0,a[j - 1].price.length -1)) < parseInt(last.price.substring(0,last.price.length-1))) {
+            a[j] = a[j -1];
+            j = j - 1;
+        }
+        a[j] = last;
+      }
+      
+      res.render("productNewPage", {
+        userID: req.session.User,
+        productType: ["gundam", "toys", "game"],
+        listProducts: a,
+        amount: sumProduct(req.session.Cart)
+      });
+    });
+  }
+  else {
+    productModel.findProduct({}, (result) => {
+    
+      res.render("productNewPage", {
+        userID: req.session.User,
+        productType: ["gundam", "toys", "game"],
+        listProducts: result,
+        amount: sumProduct(req.session.Cart)
+      });
+    });
+  }
+}
+
