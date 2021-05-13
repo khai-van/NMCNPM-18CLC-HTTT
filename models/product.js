@@ -117,10 +117,7 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
                         });
                     };
                     create_bill(ID_bill, new Date(), total, id_cus, shipaddress, function (result) { }); // Tạo bill với các thông tin chung
-                    //Thêm các sản phẩm vào chi tiết của bill vừa tạo
-                    /*for (items in list_items) {
-                        create_detail_bill(ID_bill, items, list_items[items], 1000000, function (result) { });
-                    }*/
+                    return callback(0);
                 });
             }
             else {
