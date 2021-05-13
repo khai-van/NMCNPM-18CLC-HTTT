@@ -192,11 +192,11 @@
                     $("#button-closed").text("Đóng");
                     if (data.state == "success") {
                         $("#notif").text("Đã đặt hàng thành công thành công");
-                        sleep(2000);
+                        await sleep(2000);
                         window.location.replace("/");
                     } else {
                         $("#notif").text("Đặt hàng không thành công");
-                        sleep(2000);
+                        await sleep(2000);
                         window.location.replace("/cartp");
                     }
                 }
