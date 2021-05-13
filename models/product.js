@@ -100,6 +100,28 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
                     }
                     let total = 0;
                     //Cập nhật lại số lượng sản phẩm còn lại và tính tổng tiền
+                    var list_id = Object.keys(list_items);
+                    var query = {           // tạo query tìm tất các sản phẩm có id trong list_item
+                        id: {
+                            $in: list_id
+                        }
+                    }
+                    findProduct(query, (result) => {
+                        var products = result; // list sản phẩm có id trong cart
+                        for (item in products) {
+                            list_items[products[item].id] = products[item].amount - list_items[products[item].id];
+                            total += (products[item].price*products[item].amount);
+                        }
+                        for (item in list_items) {
+                            var myquery = { id: item };
+                            var newvalues = { $set: { amount: list_items[item] } };
+                            dbo.collection("Products").updateOne(myquery, newvalues, function (err, res) {
+                                if (err) throw err;
+                                db.close();
+                            });
+                        }
+                    })
+                    /*
                     for (items in list_items) {
                         let id = items;
                         get_amount(id, function (result) {
@@ -111,12 +133,12 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
                             });
                         });
                         var query = { id: id }
-                        findProduct(query, function (result) {
-                            total += result[0].price;
-                            create_detail_bill(ID_bill, id, list_items[id], result[0].price, function (result) { });
-                        });
-                    };
-                    create_bill(ID_bill, new Date(), total, id_cus, shipaddress, function (result) { }); // Tạo bill với các thông tin chung
+                        */
+                    /*findProduct(query, function (result) {
+                        total += result[0].price;
+                        create_detail_bill(ID_bill, id, list_items[id], result[0].price, function (result) { });
+                    });
+                    create_bill(ID_bill, new Date(), total, id_cus, shipaddress, function (result) { }); // Tạo bill với các thông tin chung*/
                     return callback(0);
                 });
             }
@@ -127,7 +149,7 @@ function Purchase(list_items, id_cus, shipaddress, callback) {
         });
     })
 };
-
+Purchase({ "SP1": 2, "SP2": 3 }, "abc", "xyz", function (result) { console.log(result) });
 function checkCart(cart, callback){ // Cart chuyền vào là một object có dạng { id_sanpham: so luong, ... } không phải list object [ {id:.., amount..},...] 
   var list_items = Object.keys(cart);
   var query = {           // tạo query tìm tất các sản phẩm có id trong list_item
