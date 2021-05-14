@@ -66,9 +66,31 @@
                             <th></th>
                         </tr>
                         <tr>
-                            <td style="color: red;">#1303</td>
+                            <td style="color: red;">#1304</td>
                             <td>16/04/2021</td>
                             <td>Lê Long</td>
+                            <td>227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP. HCM</td>
+                            <td>2.400.000đ</td>
+                            <td><i>Chưa thanh toán</i></td>
+                            <td> <a style="text-decoration: none;color: red;" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#model_detail">Chi tiết</a></td>
+
+                        </tr>
+                        <tr>
+                            <td style="color: red;">#1305</td>
+                            <td>20/04/2021</td>
+                            <td>Chí Duy</td>
+                            <td>227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP. HCM</td>
+                            <td>2.400.000đ</td>
+                            <td><i>Chưa thanh toán</i></td>
+                            <td> <a style="text-decoration: none;color: red;" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#model_detail">Chi tiết</a></td>
+
+                        </tr>
+                        <tr>
+                            <td style="color: red;">#1306</td>
+                            <td>30/04/2021</td>
+                            <td>Thảo Lê</td>
                             <td>227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP. HCM</td>
                             <td>2.400.000đ</td>
                             <td><i>Chưa thanh toán</i></td>
@@ -111,10 +133,85 @@
                         </div>
                     </div>
 
+                    <button data-bs-target="#update_info" type="button" data-bs-toggle="modal" class="btn btn-primary" style="background-color: red;">Sửa thông tin</button>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal-DAT -->
+    <div class="modal fade" id="update_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sửa thông tin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container con_signup text_all text-center">
+                    <hr>
+                    <form action="/signup" method="POST">
+                        <div class="form-floating mb-3">
+                            <input id="name" name="name" type="full name" class="form-control" id="floatingInput"
+                                placeholder="Nguyen Van A " oninvalid="this.setCustomValidity('Hãy nhập họ tên')"
+                                oninput="setCustomValidity('')" required />
+                            <label for="floatingInput">Họ Tên</label>
+                        </div>
+                
+                        <div class="form-floating mb-3">
+                            <input id="dob" name="dob" type="date" placeholder="birthday" class="form-control" id="floatingInput"
+                                oninvalid="this.setCustomValidity('Vui lòng điền ngày sinh')" oninput="setCustomValidity('')"
+                                required />
+                            <label for="birthday">Ngày Sinh</label>
+                        </div>
+                
+                        <div class="form-floating mb-3">
+                            <input id="email" name="email" type="email" class="form-control" id="floatingInput"
+                                placeholder="name@example.com"
+                                oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ email dạng name@email.com')"
+                                oninput="setCustomValidity('')" required />
+                            <label for=" floatingInput">Địa Chỉ Email</label>
+                        </div>
+                
+                        <div class="form-floating mb-3">
+                            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                oninvalid="this.setCustomValidity('Hãy tạo mật khẩu')" oninput="setCustomValidity('')" required />
+                            <label for="floatingPassword">Mật khẩu</label>
+                        </div>
+                
+                        <div class="form-floating mb-3">
+                            <input id="phone" name="phone" type="number" class="form-control" id="floatingInput"
+                                placeholder="1234567890" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')"
+                                oninput="setCustomValidity('')" required />
+                            <label for="floatingInput">Số Điện Thoại</label>
+                        </div>
+                
+                        <div class="form-floating mb-3">
+                            <input id="address" name="address" type="address" class="form-control" id="floatingInput"
+                                placeholder="Address" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ')"
+                                oninput="setCustomValidity('')" required />
+                            <label for="floatingInput">Địa Chỉ</label>
+                        </div>
+                
+                        
+                
+                        
+                    </form>
+                
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn_dn fw-bold btn btn-primary">Cập nhật</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy bỏ</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="model_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -170,6 +267,9 @@
             </div>
         </div>
     </div>
+
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
