@@ -118,12 +118,18 @@ exports.HomePage = function (req, res) {
 };
 
 exports.categoryProduct = function (req, res) {
+  console.log(req.query);
   if (Object.keys(req.query).length !== 0) {
-    var query = {
-      type: {
-        $in: req.query.types
-      }
-    };
+    var query;
+    if (req.query.type) {
+      query = {};
+      query.type = {
+        $in: [req.query.type]
+      };
+    }
+    if (req.query.bestseller) {
+      query = {}
+    }
     if (req.query.name) {
       query.name = {
         $regex: req.query.name,
@@ -131,15 +137,20 @@ exports.categoryProduct = function (req, res) {
       };
     }
     productModel.findProduct(query, (result) => {
-      res.status(200).send({
-        state: result,
+      var listProducts = result;
+
+      res.render("catalog", {
+        userID: req.session.User,
+        productType: ["gundam", "toys", "game"],
+        listProducts: listProducts,
+        amount: sumProduct(req.session.Cart)
       });
     });
   } else {
     productModel.findProduct({}, (result) => {
       var listProducts = result;
 
-      res.render("category", {
+      res.render("index", {
         userID: req.session.User,
         productType: ["gundam", "toys", "game"],
         listProducts: listProducts,
@@ -185,105 +196,3 @@ exports.getcomment = function (req, res) {
     });
   }
 };
-
-
-exports.productNewPage = function (req, res) {
-  req.session.previous = "/productNewPage";
-  if(req.query.hasOwnProperty('_sort_AZ')) {
-    productModel.findProduct({}, (result) => {
-      var a = result;
-      for(var i = 0; i < a.length; i++){
-        var last = a[i];
-        var j = i;
-        while(j > 0 && a[j - 1].name > last.name){
-            a[j] = a[j -1];
-            j = j - 1;
-        }
-        a[j] = last;
-      }
-      
-      res.render("productNewPage", {
-        userID: req.session.User,
-        productType: ["gundam", "toys", "game"],
-        listProducts: a,
-        amount: sumProduct(req.session.Cart)
-      });
-    });
-  }
-  else if(req.query.hasOwnProperty('_sort_ZA')) {
-    productModel.findProduct({}, (result) => {
-      var a = result;
-      for(var i = 0; i < a.length; i++){
-        var last = a[i];
-        var j = i;
-        while(j > 0 && a[j - 1].name < last.name){
-            a[j] = a[j -1];
-            j = j - 1;
-        }
-        a[j] = last;
-      }
-      
-      res.render("productNewPage", {
-        userID: req.session.User,
-        productType: ["gundam", "toys", "game"],
-        listProducts: a,
-        amount: sumProduct(req.session.Cart)
-      });
-    });
-  }
-  else if(req.query.hasOwnProperty('_sort_tang')) {
-    productModel.findProduct({}, (result) => {
-      var a = result;
-      for(var i = 0; i < a.length; i++){
-        var last = a[i];
-        var j = i;
-        while(j > 0 && parseInt(a[j - 1].price.substring(0,a[j - 1].price.length-1)) > parseInt(last.price.substring(0,last.price.length-1))){
-            a[j] = a[j -1];
-            j = j - 1;
-        }
-        a[j] = last;
-      }
-      
-      res.render("productNewPage", {
-        userID: req.session.User,
-        productType: ["gundam", "toys", "game"],
-        listProducts: a,
-        amount: sumProduct(req.session.Cart)
-      });
-    });
-  }
-  else if(req.query.hasOwnProperty('_sort_giam')) {
-    productModel.findProduct({}, (result) => {
-      var a = result;
-      for(var i = 0; i < a.length; i++){
-        var last = a[i];
-        var j = i;
-        console.log(parseInt(last.price.substring(0,last.price.length -1)))
-        while(j > 0 && parseInt(a[j - 1].price.substring(0,a[j - 1].price.length -1)) < parseInt(last.price.substring(0,last.price.length-1))) {
-            a[j] = a[j -1];
-            j = j - 1;
-        }
-        a[j] = last;
-      }
-      
-      res.render("productNewPage", {
-        userID: req.session.User,
-        productType: ["gundam", "toys", "game"],
-        listProducts: a,
-        amount: sumProduct(req.session.Cart)
-      });
-    });
-  }
-  else {
-    productModel.findProduct({}, (result) => {
-    
-      res.render("productNewPage", {
-        userID: req.session.User,
-        productType: ["gundam", "toys", "game"],
-        listProducts: result,
-        amount: sumProduct(req.session.Cart)
-      });
-    });
-  }
-}
-

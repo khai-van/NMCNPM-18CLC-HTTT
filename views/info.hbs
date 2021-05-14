@@ -1,0 +1,132 @@
+<div class="container py-5">
+        <div class="row justify-content-md-center">
+            <div class="row" style="width:80%">
+                <div>
+                    <h4>THÔNG TIN TÀI KHOẢN</h4>
+                </div>
+
+                <div>
+                    <p><i>Xin chào, </i> <b> Nguyễn Đình Thảo</b></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-auto">
+                    <div style="padding-bottom: 5px;">
+                        <b>Đơn hàng gần nhất</b>
+                    </div>
+
+                    <table id="tbl">
+                        <tr>
+                            <th class="col col-1">#</th>
+                            <th class="col col-1">Ngày</th>
+                            <th class="col col-2">Chuyển đến</th>
+                            <th class="col col-3">Địa chỉ</th>
+                            <th class="col col-2">Giá trị</th>
+                            <th class="col col-2">TT Thanh toán</th>
+                            
+                        </tr>
+                        <tr>
+                            <td style="color: red;">#1303</td>
+                            <td>16/04/2021</td>
+                            <td>Lê Long</td>
+                            <td>227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP. HCM</td>
+                            <td>2.400.000đ</td>
+                            <td><i>Chưa thanh toán</i></td>
+                            <td> <a style="text-decoration: none;color: red;" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#model_detail">Chi tiết</a></td>
+
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col">
+                    <div>
+                        <b style="padding-bottom: 5px;">Thông tin khách hàng</b>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-auto" style="padding-right: 0%;">
+                            <h6 class="bi bi-person-fill" style="color: red; "></h6>
+                        </div>
+                        <div class="col">
+                            <p>Nguyễn Đình Thảo</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-auto " style="padding-right: 0%;">
+                            <h6 class="bi bi-geo-alt-fill" style="color: red; "></h6>
+                        </div>
+                        <div class="col">
+                            <p>277 Nguyễn Văn Cừ, Phường 4, Quận 5, TP. HCM</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-auto" style="padding-right: 0%;">
+                            <h6 class="bi bi-telephone-fill" style="color: red; "></h6>
+                        </div>
+                        <div class="col">
+                            <p style="color: red;">0917845908</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="model_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Đơn Hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mx-3">
+                        <div class="row">
+                            <table id="tbl">
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Mã sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
+                                </tr>
+                                <tr>
+                                    <th>Sản phẩm 1</th>
+                                    <td>SP123</td>
+                                    <td>200.000đ</td>
+                                    <td>12</td>
+                                    <td>2.400.000đ</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="row pt-3">
+                            <table id="tbl">
+                                <tr>
+                                    <th>Tạm tính:</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <th>Phí vận chuyển:</th>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <th>Tổng tiền:</th>
+                                    <th>2.400.000đ</th>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng lại</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
