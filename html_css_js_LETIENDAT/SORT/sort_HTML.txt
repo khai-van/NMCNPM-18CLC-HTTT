@@ -1,0 +1,39 @@
+<div class="d-flex flex-row-reverse bd-highlight">
+        <select class="form-select sort-options p-2 bd-highlight me-5 mb-2" aria-label="Default select example">
+            <option selected>Default</option>
+            <option value="1">A -> Z</option>
+            <option value="2">Z -> A</option>
+            <option value="3">Giá tăng dần</option>
+            <option value="4">Giá giảm dần</option>
+        </select>
+</div>
+
+
+<div class="list-product container">
+        <div class="row pt-2 mx-n2 list_product">
+            <!-- Product -->
+            {{#each listProducts}}
+            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                <div class="card product-card">
+                    <div class="product-card-actions d-flex align-items-center">
+                    </div><a class="card-img-top d-block overflow-hidden" href="/product?id={{this.id}}"><img
+                            class="hinh_san_pham" src="{{this.files.[0]}}" alt="Product"></a>
+                    <div class="card-body py-2">
+                        <h3 class="product-title fs-sm text-truncate"><a class="ten_san_pham"
+                                href="/product?id={{this.id}}">{{this.name}}</a></h3>
+                        <div class="d-flex justify-content-between">
+                            <div class="product-price gia_san_pham"><span class="text-accent">{{this.price}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body card-body-hidden">
+                        <input class="nut_san_pham btn btn-primary btn-sm d-block w-100 mb-2" value="Thêm vào giỏ hàng"
+                            type="button" onclick="addToCart('{{this.id}}', 1, '{{this.price}}')">
+
+                    </div>
+                </div>
+                <hr class="d-sm-none">
+            </div>
+            {{/each}}
+
+        </div>
