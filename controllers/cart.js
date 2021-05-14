@@ -1,4 +1,5 @@
-var product_Model = require("../models/product")
+var product_Model = require("../models/product");
+var customer_Model = require("../models/customer");
 
 const sumProduct = (obj) => {
     if (obj === undefined || Object.keys(obj).length == 0) return 0;
@@ -88,11 +89,14 @@ exports.purchasePage = function (req, res) {
                         if (result !== 0 && ret[i].id == result) err = ret[i].name;
                     }
                     if (result == 0) {
-                        res.render("purchase", {
-                            userID: req.session.User,
-                            productType: ["gundam", "toys", "game"],
-                            listCart: ret,
-                            amount: sumProduct(req.session.Cart)
+                        customer_Model.getinfo_user(req.session.User,(user)=>{
+                            res.render("purchase", {
+                                userID: req.session.User,
+                                productType: ["gundam", "toys", "game"],
+                                listCart: ret,
+                                amount: sumProduct(req.session.Cart),
+                                user: user
+                            });
                         });
                     } else {
                         res.render("cart", {

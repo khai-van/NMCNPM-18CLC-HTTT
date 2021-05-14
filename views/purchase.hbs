@@ -13,16 +13,16 @@
 
                         <div class="container">
                             <div class="row pb-2">
-                                <input type="email" class="form-control" placeholder="Email" disabled>
+                                <input type="email" class="form-control" placeholder="{{user.email}}" disabled>
                             </div>
                             <div class="row pb-2">
-                                <input type="name" class="form-control" placeholder="Họ và tên" disabled>
+                                <input type="name" class="form-control" placeholder="{{user.fullname}}" disabled>
                             </div>
                             <div class="row pb-2">
-                                <input type="text" class="form-control" placeholder="Số điện thoại" disabled>
+                                <input type="text" class="form-control" placeholder="{{user.number}}" disabled>
                             </div>
                             <div class="row">
-                                <textarea placeholder="địa chỉ" name="info" rows="3" disabled></textarea>
+                                <textarea placeholder="{{user.address}}" name="info" rows="3" disabled></textarea>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                     <p>Tạm tính</p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <p id="total1">5.800.000đ</p>
+                                    <p id="total1"></p>
                                 </div>
                             </div>
                             <div class="row">
