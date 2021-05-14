@@ -131,6 +131,7 @@ exports.categoryProduct = function (req, res) {
       query = {}
     }
     if (req.query.name) {
+      if(query === undefined) query={};
       query.name = {
         $regex: req.query.name,
         $options: "i"

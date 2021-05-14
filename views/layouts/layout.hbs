@@ -98,10 +98,10 @@
       <!-- search-bar -->
       <form id="search_bar" method="get" class="has-validation-callback">
         <div class="input-group">
-          <input type="text" name="query" class="search-auto form-control" placeholder="Đấu Sĩ LBX?"
+          <input type="text" name="query" id="query" class="search-auto form-control" placeholder="Đấu Sĩ LBX?"
             aria-label="Tìm kiếm">
 
-          <button class="navbar-light bg-dark" type="submit" aria-label="Tìm kiếm"
+          <button class="navbar-light bg-dark search-btn" type="button" aria-label="Tìm kiếm"
             style="border: 0px; padding-right: 10px; padding-left: 10px;"><i class="ti-search"></i></button>
 
         </div>
@@ -342,6 +342,13 @@
       $('#content').click(hide_search);
       $('#footer').click(hide_search);
 
+      $('.search-btn').click(function() {
+        var query = $('#query').val();
+        if(query != ""){
+          console.log("/catalog?name="+query);
+          window.location.replace("/catalog?name="+query);
+        }
+      });
     });
 
     function show_table_login_sigin() {
