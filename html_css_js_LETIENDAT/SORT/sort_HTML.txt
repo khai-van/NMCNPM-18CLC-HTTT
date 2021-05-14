@@ -1,3 +1,4 @@
+
 <div class="d-flex flex-row-reverse bd-highlight">
         <select class="form-select sort-options p-2 bd-highlight me-5 mb-2" aria-label="Default select example">
             <option selected>Default</option>
@@ -7,7 +8,6 @@
             <option value="4">Giá giảm dần</option>
         </select>
 </div>
-
 
 <div class="list-product container">
         <div class="row pt-2 mx-n2 list_product">
@@ -37,3 +37,13 @@
             {{/each}}
 
         </div>
+
+
+<style>
+    #content .sort-options {
+        max-width: 200px !important;
+    }
+</style>
+
+
+
