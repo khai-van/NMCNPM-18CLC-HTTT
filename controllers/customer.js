@@ -1,5 +1,16 @@
+
+var currencyFormatter = require("currency-formatter");
+
 var customerModel = require("../models/customer");
 var productModel = require("../models/product");
+
+function join(t, a, s) {
+  function format(m) {
+     let f = new Intl.DateTimeFormat('en', m);
+     return f.format(t);
+  }
+  return a.map(format).join(s);
+}
 
 const sumProduct = (obj) => {
   if (obj === undefined || Object.keys(obj).length == 0) return 0;
@@ -9,11 +20,29 @@ const sumProduct = (obj) => {
 exports.infoPage = function (req, res) {
   if (req.session.User && req.session.User != "admin") {
     customerModel.getinfo_user(req.session.User, (result) => {
+      var user = result;
       if (result != -1) {
-        res.render("info", {
-          userID: req.session.User,
-          info: result,
-          amount: sumProduct(req.session.Cart)
+        productModel.get_bill(req.session.User, (bill) => {
+          let a = [{
+            day: 'numeric'
+          }, {
+            month: 'numeric'
+          }, {
+            year: 'numeric'
+          }];
+          for (i in bill) {
+
+            bill[i].date_created = join(bill[i].date_created, a, '-');
+            bill[i].total = currencyFormatter.format(bill[i].total, { code: "VND"});
+          }
+          console.log(user);
+          res.render("infoUser", {
+            userID: req.session.User,
+            info: user,
+            amount: sumProduct(req.session.Cart),
+            bill: bill
+          });
+
         });
       }
     });

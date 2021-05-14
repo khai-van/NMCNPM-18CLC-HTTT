@@ -1,0 +1,297 @@
+<div class="container py-3">
+    <div class="row justify-content-md-center">
+        <div class="row" style="width:80%">
+            <div>
+                <h4>THÔNG TIN TÀI KHOẢN</h4>
+            </div>
+
+            <div>
+                <p><i>Xin chào, {{info.fullname}}</i> <b></b></p>
+            </div>
+        </div>
+        <div class=" row" style="width: 80%">
+            <div class="col-md-auto">
+                <div style="padding-bottom: 5px;">
+                    <b>Đơn hàng gần nhất</b>
+                </div>
+
+                <table id="tbl">
+                    <tr>
+                        <th>#</th>
+                        <th>Ngày</th>
+                        <th>Chuyển đến</th>
+                        <th>Địa chỉ</th>
+                        <th>Giá trị</th>
+                        <th>TT Thanh toán</th>
+                        <th></th>
+                    </tr>
+                    {{#each bill}}
+                    <tr>
+                        <td style="color: red;">{{this.idbill}}</td>
+                        <td>{{this.date_created}}</td>
+                        <td>{{../info.fullname}}</td>
+                        <td>{{../info.address}}</td>
+                        <td>{{this.total}}</td>
+                        <td><i>{{this.status}}</i></td>
+                        <td> <a style="text-decoration: none;color: red;" href="#" data-bs-toggle="modal"
+                                data-bs-target="#model_detail" onclick="detail('{{this.idbill}}')">Chi tiết</a></td>
+
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+
+            <div class="col thongtin">
+                <div>
+                    <b style="padding-bottom: 5px;">Thông tin khách hàng</b>
+                </div>
+
+                <div class="row">
+                    <div class="col col-md-auto icon_nguoi" style="padding-right: 0%;">
+                        <h6 class="bi bi-person-fill" style="color: red; "></h6>
+                    </div>
+                    <div class="col">
+                        <p>{{info.fullname}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-md-auto icon_dinhvi" style="padding-right: 0%;">
+                        <h6 class="bi bi-geo-alt-fill" style="color: red; "></h6>
+                    </div>
+                    <div class="col">
+                        <p>{{info.address}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-md-auto icon_dienthoai" style="padding-right: 0%;">
+                        <h6 class="bi bi-telephone-fill " style="color: red; "></h6>
+                    </div>
+                    <div class="col">
+                        <p style="color: red;">{{info.number}}</p>
+                    </div>
+                </div>
+
+                <button data-bs-target="#update_info" type="button" data-bs-toggle="modal" class="btn btn-primary"
+                    style="background-color: red;">Sửa thông tin</button>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal-DAT -->
+<div class="modal fade" id="update_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa thông tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container con_signup text_all text-center">
+                <hr>
+                <form action="/signup" method="POST">
+                    <div class="form-floating mb-3">
+                        <input id="name" name="name" type="full name" class="form-control" id="floatingInput"
+                            placeholder="{{user.fullname}}" />
+                        <label for="floatingInput">Họ Tên</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input id="email" name="email" type="email" class="form-control" id="floatingInput"
+                            placeholder="{{user.email}}" />
+                        <label for=" floatingInput">Địa Chỉ Email</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input name="password" type="password" class="form-control" id="floatingPassword"
+                            placeholder="Password" />
+                        <label for="floatingPassword">Mật khẩu</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input id="phone" name="phone" type="number" class="form-control" id="floatingInput"
+                            placeholder="{{user.number}}" />
+                        <label for="floatingInput">Số Điện Thoại</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input id="address" name="address" type="address" class="form-control" id="floatingInput"
+                            placeholder="{{user.address}}" />
+                        <label for="floatingInput">Địa Chỉ</label>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="submit" class="btn_dn fw-bold btn btn-danger" id="update">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="model_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Đơn Hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mx-3">
+                    <div class="row">
+                        <table id="tbl" class="tbl">
+                        </table>
+                    </div>
+
+                    <div class="row pt-3">
+                        <table id="tbl">
+                            <tr>
+                                <th>Tạm tính:</th>
+                                <td class="price"></td>
+                            </tr>
+                            <tr>
+                                <th>Phí vận chuyển:</th>
+                                <td>0 VND</td>
+                            </tr>
+                            <tr>
+                                <th>Tổng tiền:</th>
+                                <th class="price"></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal thong bao-->
+<div class="modal fade" id="notice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Đã cập nhật thông tin khách hàng
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .text_all {
+        font-size: 80%;
+        color: rgb(66, 59, 59);
+    }
+
+    #tbl td,
+    th {
+        border: 1px solid gray;
+        padding: 3px;
+        padding-right: 15px;
+        width: fit-content;
+    }
+
+    @media (max-width:768px) {
+        .thongtin {
+
+            /* padding-right: 5px; */
+
+        }
+
+        .icon_dinhvi {
+            max-width: 30px !important;
+            max-height: 30px !important;
+        }
+
+        .icon_nguoi {
+            max-width: 30px !important;
+            max-height: 30px !important;
+        }
+
+        .icon_dienthoai {
+            max-width: 30px !important;
+            max-height: 30px !important;
+        }
+
+    }
+</style>
+
+<script>
+    function detail(id) {
+
+        $.ajax({
+            url: "/user/detailBill",
+            type: "GET",
+            data: {
+                id: id,
+            },
+            dataType: "json",
+
+            success: async function (d) {
+                var data = d.state;
+                var table = document.getElementsByClassName("tbl")[0];
+                table.innerHTML = `<tr>
+                                <th>Sản phẩm</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                            </tr>`;
+                var total = 0;
+                for (i in data) {
+                    data[i].unit_price = data[i].unit_price.toLocaleString('it-IT', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
+                    total += data[i].total_price;
+                    data[i].total_price = data[i].total_price.toLocaleString('it-IT', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
+
+                    table.innerHTML += `<tr>
+                                <th>${data[i].name}</th>
+                                <td>${data[i].id}</td>
+                                <td>${data[i].unit_price}</td>
+                                <td>${data[i].amount}</td>
+                                <td>${data[i].total_price}</td>
+                            </tr>`;
+                }
+                total = total.toLocaleString('it-IT', {
+                    style: 'currency',
+                    currency: 'VND'
+                });
+                var price = document.getElementsByClassName("price");
+                for (i in price) {
+                    price[i].innerHTML = total;
+                }
+            }
+        });
+    }
+    $("#update").click(function () {
+        $("#update_info").modal("hide");
+        $("#notice").modal("show");
+    });
+</script>

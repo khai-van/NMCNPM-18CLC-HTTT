@@ -68,14 +68,12 @@ function login(username, pass, callback) {
 //get information of user with id
 function getinfo_user(id, callback) {
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
-    console.log(id);
     if (err) throw err;
     var dbo = db.db("QuanLyCuaHang");
     var query = { id: id };
     dbo.collection("Customers").find(query).toArray(function (err, result) {
         if (err) throw err;
         db.close();
-        console.log("res",result);
         if (result.length == 0) {
           return callback(-1);
         }

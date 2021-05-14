@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-body card-body-hidden">
                     <input class="nut_san_pham btn btn-primary btn-sm d-block w-100 mb-2" value="Thêm vào giỏ hàng"
-                        type="button" onclick="addToCart('{{this.id}}', 1, '{{this.price}}')">
+                        type="button" onclick="addToCart('{{this.id}}', 1)">
 
                 </div>
             </div>
@@ -45,3 +45,23 @@
     </style>
 
     <script src="/javascript/sort3.js"></script>
+    <script>
+        function addToCart(id, amount) {
+            $.ajax({
+                url: "/cart",
+                type: "GET",
+                data: {
+                    id: id,
+                    amount: amount
+                },
+                dataType: "json",
+
+                success: async function (data) {
+                    if (data.state != "fail") {
+                        $(".p1").attr("data-count", data.state);
+                    }
+                }
+            });
+        }
+    </script>
+</div>

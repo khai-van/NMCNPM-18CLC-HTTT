@@ -118,7 +118,6 @@ exports.HomePage = function (req, res) {
 };
 
 exports.categoryProduct = function (req, res) {
-  console.log(req.query);
   if (Object.keys(req.query).length !== 0) {
     var query;
     if (req.query.type) {
@@ -197,3 +196,18 @@ exports.getcomment = function (req, res) {
     });
   }
 };
+
+exports.detailBill = function (req, res) {
+  if (req.session.User && req.session.User != "admin") {
+    if (Object.keys(req.query).length !== 0) {
+      var idbill = req.query.id;
+      productModel.get_detail_bill(idbill, (result)=>{
+        res.status(200).send({
+          state: result,
+        });
+      });
+    }
+  } else {
+    res.redirect("/signin")
+  }
+}

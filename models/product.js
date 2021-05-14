@@ -278,7 +278,7 @@ function get_detail_bill(id_bill, callback) {
     if (err) throw err;
     var dbo = db.db("QuanLyCuaHang");
     var query = {
-      idbill: id_bill
+      ID_bill: id_bill
     };
     dbo.collection("Detail_Bills").find(query).toArray(function (err, result) {
       if (err) throw err;
