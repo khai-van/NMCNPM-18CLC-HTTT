@@ -32,6 +32,30 @@
             padding-right: 15px;
             width: fit-content;
         }
+
+    @media (max-width:768px) {
+    .thongtin {
+        
+        /* padding-right: 5px; */
+        
+    }
+
+    .icon_dinhvi{
+        max-width: 30px !important;
+        max-height: 30px !important;
+    }
+
+    .icon_nguoi{
+        max-width: 30px !important;
+        max-height: 30px !important;
+    }
+
+    .icon_dienthoai{
+        max-width: 30px !important;
+        max-height: 30px !important;
+    }
+    
+}
     </style>
 </head>
 
@@ -101,13 +125,13 @@
                     </table>
                 </div>
 
-                <div class="col">
+                <div class="col thongtin">
                     <div>
                         <b style="padding-bottom: 5px;">Thông tin khách hàng</b>
                     </div>
 
                     <div class="row">
-                        <div class="col col-md-auto" style="padding-right: 0%;">
+                        <div class="col col-md-auto icon_nguoi" style="padding-right: 0%;">
                             <h6 class="bi bi-person-fill" style="color: red; "></h6>
                         </div>
                         <div class="col">
@@ -116,7 +140,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col col-md-auto " style="padding-right: 0%;">
+                        <div class="col col-md-auto icon_dinhvi" style="padding-right: 0%;">
                             <h6 class="bi bi-geo-alt-fill" style="color: red; "></h6>
                         </div>
                         <div class="col">
@@ -125,8 +149,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="col col-md-auto" style="padding-right: 0%;">
-                            <h6 class="bi bi-telephone-fill" style="color: red; "></h6>
+                        <div class="col col-md-auto icon_dienthoai" style="padding-right: 0%;">
+                            <h6 class="bi bi-telephone-fill " style="color: red; "></h6>
                         </div>
                         <div class="col">
                             <p style="color: red;">0917845908</p>
