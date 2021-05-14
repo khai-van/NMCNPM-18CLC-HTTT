@@ -198,7 +198,7 @@ exports.getcomment = function (req, res) {
 };
 
 exports.detailBill = function (req, res) {
-  if (req.session.User && req.session.User != "admin") {
+  if (req.session.User) {
     if (Object.keys(req.query).length !== 0) {
       var idbill = req.query.id;
       productModel.get_detail_bill(idbill, (result)=>{

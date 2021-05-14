@@ -1,3 +1,8 @@
+const {
+  get_bill,
+  get_all_bill
+} = require("../models/product");
+
 exports.admin_detail = function (req, res) {
   if (req.session.User == "admin") {
     res.render("admin", {
@@ -19,6 +24,24 @@ exports.addProductForm = function (req, res) {
     res.redirect("/signin");
   }
 };
+
+
+exports.orderManage = function (req, res) {
+  if (req.session.User == "admin") {
+    get_all_bill((result) => {
+      res.render("orderManage", {
+        mode: 3,
+        layout: "admin_layout",
+        bill: result,
+        productType: ["gundam", "toys", "game"],
+      });
+    });
+
+  } else {
+    res.redirect("/signin");
+  }
+}
+
 
 exports.logOut = function (req, res) {
   req.session.User = "";

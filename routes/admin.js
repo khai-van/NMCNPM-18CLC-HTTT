@@ -20,6 +20,9 @@ router.post("/addProduct", upload.array('upload', 10), product_controller.addPro
 
 router.post("/adjustProduct",upload.array('upload', 1), product_controller.adjustProduct);
 
+router.get("/orderManage", admin_controller.orderManage);
+
+router.post("/adjustProduct",upload.array('upload', 1), product_controller.adjustProduct);
 
 
 

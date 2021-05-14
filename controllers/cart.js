@@ -89,7 +89,7 @@ exports.purchasePage = function (req, res) {
                         if (result !== 0 && ret[i].id == result) err = ret[i].name;
                     }
                     if (result == 0) {
-                        customer_Model.getinfo_user(req.session.User,(user)=>{
+                        customer_Model.getinfo_user(req.session.User, (user) => {
                             res.render("purchase", {
                                 userID: req.session.User,
                                 productType: ["gundam", "toys", "game"],
@@ -121,18 +121,19 @@ exports.purchasePage = function (req, res) {
 exports.purchase = function (req, res) {
     if (req.session.User && req.session.User != "admin") {
         if (req.session.Cart !== undefined && Object.keys(req.session.Cart).length !== 0) {
-            console.log(req.session.Cart);
-            product_Model.Purchase(req.session.Cart, req.session.User,"abc",(result) => {
-                if (result == 0) {
-                    req.session.Cart = {};
-                    res.status(200).send({
-                        state: "success",
-                    });
-                } else {
-                    res.status(200).send({
-                        state: "fail",
-                    });
-                }
+            customer_Model.getinfo_user(req.session.User, (user) => {
+                product_Model.Purchase(req.session.Cart, req.session.User, user.address, (result) => {
+                    if (result == 0) {
+                        req.session.Cart = {};
+                        res.status(200).send({
+                            state: "success",
+                        });
+                    } else {
+                        res.status(200).send({
+                            state: "fail",
+                        });
+                    }
+                });
             });
         } else {
             res.redirect("/cartp");

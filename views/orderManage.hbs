@@ -1,0 +1,142 @@
+<div class="container">
+  <h2 class="card-title text-center title"><b>Quản lý đơn hàng</b></h2>
+  <hr>
+
+  <div style="padding-bottom: 5px;">
+    <b>Đơn hàng gần nhất</b>
+  </div>
+
+  <table id="tbl">
+    <tr>
+      <th>#</th>
+      <th>Ngày</th>
+      <th>Chuyển đến</th>
+      <th>Địa chỉ</th>
+      <th>Giá trị</th>
+      <th>TT Thanh toán</th>
+      <th></th>
+    </tr>
+    {{#each bill}}
+    <tr>
+      <td style="color: red;">{{this.idbill}}</td>
+      <td>{{this.date_created}}</td>
+      <td>{{this.by_customer}}</td>
+      <td>{{this.delivery_address}}</td>
+      <td>{{this.total}}</td>
+      <td><input type="checkbox"><i>{{this.status}}</i></td>
+      <td> <a style="text-decoration: none;color: red;" data-toggle="modal" data-target="#modal"
+          onclick="detail('{{this.idbill}}')">Chi tiết</a></td>
+
+    </tr>
+    {{/each}}
+  </table>
+</div>
+/
+<!--modal-->
+    <div id="modal" class="modal fade" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mx-3">
+          <div class="row">
+            <table id="tbl" class="tbl">
+            </table>
+          </div>
+
+          <div class="row pt-3">
+            <table id="tbl">
+              <tr>
+                <th>Tạm tính:</th>
+                <td class="price"></td>
+              </tr>
+              <tr>
+                <th>Phí vận chuyển:</th>
+                <td>0 VND</td>
+              </tr>
+              <tr>
+                <th>Tổng tiền:</th>
+                <th class="price"></th>
+              </tr>
+            </table>
+          </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<style>
+  #tbl td,
+  th {
+    border: 1px solid gray;
+    padding: 3px;
+    padding-right: 15px;
+    width: fit-content;
+  }
+</style>
+
+<script>
+  function detail(id) {
+    document.getElementById("ModalLabel").innerHTML = `Thông tin đơn hàng #${id}`;
+
+    $.ajax({
+      url: "/user/detailBill",
+      type: "GET",
+      data: {
+        id: id,
+      },
+      dataType: "json",
+
+      success: async function (d) {
+        console.log(d);
+        var data = d.state;
+
+        var table = document.getElementsByClassName("tbl")[0];
+        table.innerHTML = `<tr>
+                                <th>Sản phẩm</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                            </tr>`;
+        var total = 0;
+        for (i in data) {
+          data[i].unit_price = data[i].unit_price.toLocaleString('it-IT', {
+            style: 'currency',
+            currency: 'VND'
+          });
+          total += data[i].total_price;
+          data[i].total_price = data[i].total_price.toLocaleString('it-IT', {
+            style: 'currency',
+            currency: 'VND'
+          });
+
+          table.innerHTML += `<tr>
+                                <th>${data[i].name}</th>
+                                <td>${data[i].id}</td>
+                                <td>${data[i].unit_price}</td>
+                                <td>${data[i].amount}</td>
+                                <td>${data[i].total_price}</td>
+                            </tr>`;
+        }
+        total = total.toLocaleString('it-IT', {
+          style: 'currency',
+          currency: 'VND'
+        });
+        var price = document.getElementsByClassName("price");
+        for (i in price) {
+          price[i].innerHTML = total;
+        }
+      }
+    });
+  }
+</script>
