@@ -1,6 +1,6 @@
 
 <div class="d-flex flex-row-reverse bd-highlight">
-        <select class="form-select sort-options p-2 bd-highlight me-5 mb-2" aria-label="Default select example">
+        <select class="form-select sort-options p-2 bd-highlight ms-5 mb-2" aria-label="Default select example">
             <option selected>Default</option>
             <option value="1">A -> Z</option>
             <option value="2">Z -> A</option>
