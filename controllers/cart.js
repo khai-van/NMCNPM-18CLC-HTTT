@@ -118,7 +118,7 @@ exports.purchase = function (req, res) {
     if (req.session.User && req.session.User != "admin") {
         if (req.session.Cart !== undefined && Object.keys(req.session.Cart).length !== 0) {
             console.log(req.session.Cart);
-            product_Model.Purchase1(req.session.Cart, (result) => {
+            product_Model.Purchase(req.session.Cart, req.session.User,"abc",(result) => {
                 if (result == 0) {
                     req.session.Cart = {};
                     res.status(200).send({
