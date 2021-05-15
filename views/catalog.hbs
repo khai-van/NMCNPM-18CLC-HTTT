@@ -1,4 +1,17 @@
 <div class="list-product container">
+    <nav style="
+          --bs-breadcrumb-divider: url(
+            &#34;data:image/svg + xml,
+            %3Csvgxmlns='http://www.w3.org/2000/svg'width='11'height='11'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='currentColor'/%3E%3C/svg%3E&#34;
+          );
+        " aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">HOME</a></li>
+        <li class="breadcrumb-item active page_hientai" aria-current="page">
+          Sản phẩm mới
+        </li>
+      </ol>
+    </nav>
 
     <div class="d-flex flex-row-reverse bd-highlight">
         <select class="form-select sort-options p-2 bd-highlight mt-3" aria-label="Default select example">
@@ -39,10 +52,19 @@
 
 
     <style>
-        #content .sort-options {
+        .sort-options {
             max-width: 200px !important;
         }
+        .breadcrumb a {
+       
+        font-size: 30px;
+    }
+    .page_hientai {
+        color: red !important;
+        font-size: 30px;
+    }
     </style>
+    
 
     <script src="/javascript/sort3.js"></script>
     <script>
@@ -65,3 +87,4 @@
         }
     </script>
 </div>
+
