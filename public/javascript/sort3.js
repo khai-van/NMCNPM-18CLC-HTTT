@@ -16,8 +16,10 @@ function get_content_HTML(ten, gia) {
     var item = new Object();
     for (var i = 0; i < ten.length; i++) {
         item.name = ten[i].textContent; //ten
-
+        item.nameLower = ten[i].textContent.toLowerCase();
+         
         item.price = gia[i].textContent.replace(/\s/g, ''); //gia
+        item.priceFloat = parseFloat(gia[i].innerHTML.replace(/[^0-9]/g, ''));
         item.files = new Array(); //hinh
         item.files.push(hinh[i].src);
         item.href = ten[i].href;
@@ -36,20 +38,20 @@ list_items = get_content_HTML(ten, gia)
 
 select.addEventListener('change', function () {
     if (select.value == 1) {
-        let array = sort_array_by(list_items, 'name', true);
+        let array = sort_array_by(list_items, 'nameLower', true);
         displayList(array);
 
     } else if (select.value == 2) {
-        let array = sort_array_by(list_items, 'name', false);
+        let array = sort_array_by(list_items, 'nameLower', false);
         displayList(array);
 
 
     } else if (select.value == 3) {
-        let array = sort_array_by(list_items, 'price', true);
+        let array = sort_array_by(list_items, 'priceFloat', true);
         displayList(array);
 
     } else if (select.value == 4) {
-        let array = sort_array_by(list_items, 'price', false);
+        let array = sort_array_by(list_items, 'priceFloat', false);
         displayList(array);
     }
 });
